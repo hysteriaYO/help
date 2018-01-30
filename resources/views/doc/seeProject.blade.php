@@ -68,7 +68,7 @@
         margin-top: 20px;
     }
 </style>
-@extends('basic')
+@extends('layouts.basic')
 
 @section('title','myProject')
 

@@ -5,16 +5,18 @@
  * Date: 2018/1/24
  * Time: 17:29
  */
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers\document;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Project;
+use App\model\Project;
 
 class ProjectController extends Controller
 {
     public function insertToProject()
     {
-        $data = Project::create([
+        $data =Project::create([
          'project_name'=>'文件','abstract' => 'text','doc_num' => '10','username' => 'lisi'
         ]);
 

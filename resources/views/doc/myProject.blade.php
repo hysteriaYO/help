@@ -37,6 +37,7 @@
         overflow: auto;
         z-index: 100;
         background-color: #f5f5f5;
+        padding: 10px;
         /*border-right: 1px solid #eaeaea;*/
     }
 
@@ -85,7 +86,7 @@
     }
 
 </style>
-@extends('basic')
+@extends('layouts.basic')
 
 @section('head')
 

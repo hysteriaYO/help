@@ -41,4 +41,22 @@ Route::group(['middleware' => ['web']],function(){
 
     //附件管理
     Route::post('photo','admin\PhotoController@delete')->name('photodelete');  //删除附件
+
+    //模板页
+    Route::get('base','DocController@base');
+    Route::get('basic','DocController@basic');
+
+    //主页
+//    Route::get('/','ProjectController@home');
+
+    //我的项目
+    Route::get('insertToProject','document\ProjectController@insertToProject');
+    Route::get('myProject','document\ProjectController@myProject');
+    Route::get('saveProject','document\ProjectController@saveProject');
+    Route::get('seeProject','document\ProjectController@seeProject');
+
+    //我的文档
+    Route::get('insertToDoc','document\DocController@insertToDoc');
+    Route::get('/myDoc','document\DocController@myDoc');
+    Route::get('/seeDoc','document\DocController@seeDoc');
 });

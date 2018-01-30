@@ -2,7 +2,7 @@
 {{--唐利华--}}
 
 {{--@extends('base')--}}
-@extends('basic')
+@extends('layouts.basic')
 
 @section('title','home')
 

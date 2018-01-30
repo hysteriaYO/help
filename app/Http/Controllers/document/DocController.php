@@ -5,9 +5,10 @@
  * Date: 2018/1/23
  * Time: 9:17
  */
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\document;
 
-use App\Doc;
+use App\model\Doc;
+use App\Http\Controllers\Controller;
 use App\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
