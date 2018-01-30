@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('username','14');        //用户名
             $table->string('password','60');        //密码
             $table->string('email','40');           //邮箱
-            $table->string('phone','40','');            //电话
+            $table->string('phone','40');            //电话
             $table->rememberToken();
             $table->timestamps();
         });
