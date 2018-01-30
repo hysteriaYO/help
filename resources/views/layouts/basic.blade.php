@@ -46,9 +46,9 @@
         <header class="navbar navbar-static-top navbar-fixed-top manual-header" role="banner">
             <div class="container">
                 <div class="navbar-header col-sm-12 col-md-9 col-lg-8">
-                    <a href="{{ Route('home') }}" class="navbar-brand" title="MinDoc文档管理系统">
+                    <a href="{{ Route('home') }}" class="navbar-brand" title="Doc文档管理系统">
 
-                        MinDoc文档管理系统
+                        文档管理系统
 
                     </a>
                     <nav class="collapse navbar-collapse col-sm-10">
@@ -124,68 +124,7 @@
 
     @show
 
-
-
-
-
-    {{--@section('header')--}}
-    {{--<div class="line-1"></div>--}}
-
-    {{--<div class="container">--}}
-    {{--<nav class="navbar navbar-default" style="border: none;margin-bottom: 0">--}}
-    {{--<div class="container-fluid">--}}
-    {{--<!-- Brand and toggle get grouped for better mobile display -->--}}
-    {{--<div class="navbar-header">--}}
-    {{--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">--}}
-    {{--<span class="sr-only">Toggle navigation</span>--}}
-    {{--<span class="icon-bar"></span>--}}
-    {{--<span class="icon-bar"></span>--}}
-    {{--<span class="icon-bar"></span>--}}
-    {{--</button>--}}
-    {{--<a class="navbar-brand" href="#">Brand</a>--}}
-    {{--</div>--}}
-
-    {{--<!-- Collect the nav links, forms, and other content for toggling -->--}}
-    {{--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">--}}
-    {{--<ul class="nav navbar-nav">--}}
-    {{--<li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>--}}
-    {{--<li><a href="#">标签</a></li>--}}
-
-    {{--</ul>--}}
-    {{--<form class="navbar navbar-form navbar-left">--}}
-    {{--<div class="form-group">--}}
-    {{--<input type="text" class="form-control" placeholder="Search">--}}
-    {{--<span class="ico"></span>--}}
-    {{--</div>--}}
-    {{--<button type="submit" class="btn btn-default">搜索</button>--}}
-    {{--</form>--}}
-    {{--@if(1==1)--}}
-
-    {{--<ul class="nav navbar-nav navbar-right">--}}
-    {{--<li><a href="{{url('userlogin')}}">登录</a></li>--}}
-    {{--</ul>--}}
-    {{--@else--}}
-    {{--<ul class="nav navbar-nav navbar-right">--}}
-    {{--<li class="dropdown ">--}}
-    {{--<a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;admin&nbsp;&nbsp;<span class="caret"></span></a>--}}
-    {{--<ul class="dropdown-menu" style="min-width: 120px;">--}}
-    {{--<li><a href="#">个人中心</a></li>--}}
-    {{--<li><a href="#">我的项目</a></li>--}}
-    {{--<li><a href="#">管理后台</a></li>--}}
-    {{--<li><a href="#">退出登录</a></li>--}}
-    {{--</ul>--}}
-    {{--</li>--}}
-    {{--</ul>--}}
-    {{--@endif--}}
-    {{--</div><!-- /.navbar-collapse -->--}}
-    {{--</div><!-- /.container-fluid -->--}}
-    {{--</nav>--}}
-
-    {{--</div>--}}
-    {{--<div class="line-2"></div>--}}
-    {{--@show--}}
 </div>
-
 
         {{--login register 的header--}}
         <div class="log-header">
