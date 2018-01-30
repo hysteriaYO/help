@@ -40,5 +40,5 @@ Route::group(['middleware' => ['web']],function(){
     Route::get('projectlist','HomeController@showProjectList')->name('projectlist');    //项目列表
 
     //附件管理
-    Route::post('photo','admin\PhotoController@');  //删除附件
+    Route::post('photo','admin\PhotoController@delete')->name('photodelete');  //删除附件
 });
