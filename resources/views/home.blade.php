@@ -35,18 +35,18 @@
 
 
     {{--<div class="bg-content">--}}
-        {{--<ul class="content-list">--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-            {{--<li class="content-unit"></li>--}}
-        {{--</ul>--}}
+    {{--<ul class="content-list">--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--<li class="content-unit"></li>--}}
+    {{--</ul>--}}
     {{--</div>--}}
 
 @endsection
@@ -57,4 +57,4 @@
 
 @section('log-footer')
 
-    @endsection
+@endsection

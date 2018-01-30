@@ -29,6 +29,7 @@
         width: 200px;
         margin-right: 10px;
         border-right: 2px solid #dddddd;
+        overflow: hidde1n;
     }
 
 
