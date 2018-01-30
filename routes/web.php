@@ -42,9 +42,9 @@ Route::group(['middleware' => ['web']],function(){
     //附件管理
     Route::post('photo','admin\PhotoController@delete')->name('photodelete');  //删除附件
 
-    //模板页
-    Route::get('base','DocController@base');
-    Route::get('basic','DocController@basic');
+//    //模板页
+//    Route::get('base','DocController@base');
+//    Route::get('basic','DocController@basic');
 
     //主页
 //    Route::get('/','ProjectController@home');

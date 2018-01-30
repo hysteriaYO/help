@@ -20,8 +20,9 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('uid');                        //唯一id
             $table->string('username','14');        //用户名
-            $table->string('password','40');        //密码
+            $table->string('password','60');        //密码
             $table->string('email','40');           //邮箱
+            $table->string('phone','40');            //电话
             $table->rememberToken();
             $table->timestamps();
         });
