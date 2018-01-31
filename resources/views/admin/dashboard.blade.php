@@ -7,35 +7,38 @@
     @parent
 @endsection
 
-@section('content')
-    {{--后台管理-中间内容区域--}}
-    <div class="container">
-        <div class="row">
 
-            {{--左侧菜单区域--}}
-            <div class="col-md-3">
-                <div class="list-group">
-                    <a href="{{ route('dashboard') }}">查看仪表盘</a>
-                    <a href="{{ route('photo') }}">附件管理</a>
-                    <a href="{{ route('userlist') }}">用户管理</a>
-                    <a href="{{ route('projectlist') }}">项目管理</a>
-                </div>
-            </div>
+@section('page-left')
+    @parent
+@endsection
 
-            {{--右侧自定义内容区域--}}
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading">仪表盘</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label"></label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+@section('page-right')
+    <div class="m-box">
+        <div class="box-head">
+            <strong class="box-title">仪表盘</strong>
         </div>
+    </div>
+    <div class="box-body manager" style="padding-right: 200px;">
+        <a href="{{ route('projectlist') }}" class="dashboard-item">
+            <span class="bo glyphicon glyphicon-book"></span>
+            <span class="bo-class">项目数量</span>
+            <span class="bo-class">{{ $data['projectNum'] }}</span>
+        </a>
+        <div class="dashboard-item">
+            <span class="bo glyphicon glyphicon-file"></span>
+            <span class="bo-class">文章数量</span>
+            <span class="bo-class">{{ $data['docNum'] }}</span>
+        </div>
+        <a href="{{ route('userlist') }}" class="dashboard-item">
+            <span class="bo glyphicon glyphicon-user"></span>
+            <span class="bo-class">会员数量</span>
+            <span class="bo-class">{{ $data['userNum'] }}</span>
+        </a>
+        <a href="{{ route('photo') }}" class="dashboard-item">
+            <span class="bo glyphicon glyphicon-cloud-download"></span>
+            <span class="bo-class">附件数量</span>
+            <span class="bo-class">{{ $data['photoNum'] }}</span>
+        </a>
     </div>
 @endsection
 
