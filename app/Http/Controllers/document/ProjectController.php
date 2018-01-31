@@ -11,6 +11,7 @@ namespace App\Http\Controllers\document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\model\Project;
+use Illuminate\Support\Facades\Cookie;
 
 class ProjectController extends Controller
 {
@@ -29,6 +30,16 @@ class ProjectController extends Controller
         return view('doc.home',['projects' => $projects]);
     }
 
+    //主页的搜索
+    public function homeSearch(Request $request)
+    {
+        $keyword = $request->keyword;
+        $projects = Project::where('project_name','like','%'.$keyword.'%')->get();
+
+        return $projects;
+    }
+
+
 
     public function myProject(Request $request)
     {
@@ -41,7 +52,7 @@ class ProjectController extends Controller
 
     public function saveProject()
     {
-        $username = $_GET['username'];
+        $username = Cookie::get('username');
         $project_name = $_GET['project_name'];
         $tag = $_GET['identify'];
         $abstract = $_GET['description'];
