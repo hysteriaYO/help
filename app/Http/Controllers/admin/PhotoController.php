@@ -48,6 +48,7 @@ class PhotoController extends Controller
 
     public function delete(Request $request)
     {
+        echo 1;
         if ($request->isMethod('POST'))
         {
             $photoId = $request->get('pid');

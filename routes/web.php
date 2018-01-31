@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web']],function(){
     //下拉菜单
     Route::get('person', 'HomeController@showPersonSpace')->name('users.person');  //显示用户空间
     Route::get('project', 'HomeController@showMyProject')->name('users.project');  //显示用户项目
-    Route::get('center','HomeController@showCenterForm')->name('center');   //后台管理
+//    Route::get('center','HomeController@showCenterForm')->name('center');   //后台管理
     Route::get('/home', 'users\UsersController@logout')->name('users.logOut'); //用户退出
 
     //用户
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web']],function(){
     Route::get('projectlist','HomeController@showProjectList')->name('projectlist');    //项目列表
 
     //附件管理
-    Route::post('photo','admin\PhotoController@delete')->name('photodelete');  //删除附件
+    Route::delete('photo','admin\PhotoController@delete')->name('photo.delete');  //删除附件
 
 //    //模板页
 //    Route::get('base','DocController@base');

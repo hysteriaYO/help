@@ -11,7 +11,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <title>home</title>
+    <title>文档管理系统</title>
     <style>
         body{
             background-color: #f8f8f8;
@@ -70,54 +70,35 @@
                         </div>
                     </nav>
 
-                    {{--<div class="btn-group dropdown-menu-right pull-right slidebar visible-xs-inline-block visible-sm-inline-block">--}}
-                        {{--<button class="btn btn-default dropdown-toggle hidden-lg" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i></button>--}}
-                        {{--<ul class="dropdown-menu" role="menu">--}}
-
-                            {{--<li>--}}
-                                {{--<a href="/setting" title="个人中心"><i class="fa fa-user" aria-hidden="true"></i> 个人中心</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="/book" title="我的项目"><i class="fa fa-book" aria-hidden="true"></i> 我的项目</a>--}}
-                            {{--</li>--}}
-
-                            {{--<li>--}}
-                                {{--<a href="/manager" title="管理后台"><i class="fa fa-university" aria-hidden="true"></i> 管理后台</a>--}}
-                            {{--</li>--}}
-
-                            {{--<li>--}}
-                                {{--<a href="/logout" title="退出登录"><i class="fa fa-sign-out"></i> 退出登录</a>--}}
-                            {{--</li>--}}
-
-
-                        {{--</ul>--}}
-                    {{--</div>--}}
-
                 </div>
                 <nav class="navbar-collapse hidden-xs hidden-sm" role="navigation">
 
-                    {{--{{ $cookie->getValue('username') }}--}}
-                    @if((Cookie::get('username')) == 'guest')
+                    @if(Cookie::has('username'))
+                        @if((Cookie::get('username')) == 'guest')
 
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{route('login')}}">登录</a></li>
+                            </ul>
+                        @else
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown ">
+                                    <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width: 120px;">
+                                        <li><a href="{{ Route('users.person') }}"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                                        <li><a href="myProject?username={{Cookie::get('username')}}"><span class="glyphicon glyphicon-list"></span>我的项目</a></li>
+                                        @if((Cookie::get('username')) == 'admin')
+                                            <li><a href="{{ Route('dashboard') }}"><span class="glyphicon glyphicon-home"></span>管理后台</a></li>
+                                        @endif
+                                        <li><a href="{{ Route('users.logOut') }}"><span class="glyphicon glyphicon-log-out"></span>退出登录</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        @endif
+                    @else
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{route('login')}}">登录</a></li>
                         </ul>
-                    @else
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown ">
-                                <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="min-width: 120px;">
-                                    <li><a href="{{ Route('users.person') }}">个人中心</a></li>
-                                    <li><a href="myProject?username={{Cookie::get('username')}}">我的项目</a></li>
-                                    @if((Cookie::get('username')) == 'admin')
-                                        <li><a href="{{ Route('center') }}">管理后台</a></li>
-                                    @endif
-                                    <li><a href="{{ Route('users.logOut') }}">退出登录</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     @endif
-
                 </nav>
             </div>
         </header>
@@ -159,6 +140,35 @@
     @show
 </div>
 
+<div class="container manual-body">
+    <div class="row">
+        {{--后台管理侧边栏--}}
+        <div class="page-left">
+            @section('page-left')
+            <ul class="menu">
+                <li class="active">
+                    <a href="{{ route('dashboard') }}" class="item"><span class="glyphicon glyphicon-adjust" aria-hidden="true"></span> 仪表盘</a>
+                </li>
+                <li>
+                    <a href="{{ route('userlist') }}" class="item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户管理</a>
+                </li>
+                <li>
+                    <a href="{{ route('projectlist') }}" class="item"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> 项目管理</a>
+                </li>
+                <li>
+                    <a href="{{ route('photo') }}" class="item"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> 附件管理</a>
+                </li>
+            </ul>
+            @show
+        </div>
+
+        <div class="page-right">
+            @section('page-right')
+
+            @show
+        </div>
+    </div>
+</div>
 {{--footer 通用底部内容--}}
 <div class="footer">
     @section('footer')
