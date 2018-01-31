@@ -77,8 +77,11 @@ class UsersController extends Controller
             ]);
 
         //echo '注册成功';
-        Cookie::queue('username',$_POST['username']);
-        return redirect()->route('home');
+//        Cookie::queue('username',$_POST['username']);
+//        return redirect()->route('home');
+        //返回登录页面
+        $request->session()->flash('success','注册成功！请登录');
+        return redirect()->route('login');
     }
 
     //用户编辑

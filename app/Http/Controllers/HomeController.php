@@ -6,10 +6,8 @@ use App\model\Doc;
 use App\model\Photo;
 use App\model\Project;
 use App\model\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 
 /**
  * Class HomeController
@@ -28,13 +26,13 @@ class HomeController extends Controller
         if (Cookie::has('username'))
         {
             //如果已经存在username
-            $var = Cookie::get('username');
+            //$var = Cookie::get('username');
             return view('home',['projects'=>$projects]);
         }else
         {
             //设置游客身份
             Cookie::queue('username','guest');
-            $var = Cookie::get('username');
+            //$var = Cookie::get('username');
             return view('home',['projects'=>$projects]);
         }
     }
@@ -64,26 +62,26 @@ class HomeController extends Controller
         return view('users.myProject',['projects'=>$projects]);
     }
 
-    //显示管理后台
-    public function showCenterForm()
-    {
-        return view('admin.center');
-    }
+//    //显示管理后台
+//    public function showCenterForm()
+//    {
+//        return view('admin.center');
+//    }
 
     //显示仪表盘
     public function showBoardForm()
     {
-        $usersNum = User::count();
+        $userNum = User::count();
         $projectNum = Project::count();
         $docNum = Doc::count();
         $photoNum = Photo::count();
         $data=[];
-        $data['userNum']=$usersNum;
+        $data['userNum']=$userNum;
         $data['projectNum']=$projectNum;
         $data['docNum']=$docNum;
         $data['photoNum']=$photoNum;
 
-        return view('admin.dashboard',$data);
+        return view('admin.dashboard',['data'=>$data]);
     }
 
     //显示附件管理
