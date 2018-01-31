@@ -5,6 +5,7 @@
  * Date: 2018/1/23
  * Time: 9:17
  */
+
 namespace App\Http\Controllers\document;
 
 use App\model\Doc;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Input;
 
 class DocController extends Controller
 {
+    //插入记录到docs表
     public function test()
     {
 //        $bool = DB::table('docs')->insert([
@@ -27,16 +29,17 @@ class DocController extends Controller
 //            ['title' => '星期三日记4','project_name' => '日记5' , 'doc_url' => '1235','username'=>'zhangsan5','tag'=>'hack5'],
 //        ]);
         $doc = Doc::create(array(
-            'title' => '星期三日记1','project_name' => '日记1' , 'doc_url' => '1231','username'=>'','tag'=>'hack1'
-        )
-            );
+                'title' => '星期三日记1', 'project_name' => '日记1', 'doc_url' => '1231', 'username' => '', 'tag' => 'hack1'
+            )
+        );
         $doc = Doc::create([
-                'title' => '星期三日记2','project_name' => '日记2' , 'doc_url' => '1232','username'=>'','tag'=>'hack2'
+                'title' => '星期三日记2', 'project_name' => '日记2', 'doc_url' => '1232', 'username' => '', 'tag' => 'hack2'
             ]
         );
         dd($doc);
     }
 
+    //模板页面测试
     public function base()
     {
         return view('base');
@@ -51,7 +54,7 @@ class DocController extends Controller
     {
         $posts = Doc::all();
 //        dd($posts);
-        return view('doc.home',['posts' => $posts]);
+        return view('doc.home', ['posts' => $posts]);
     }
 
     public function myDoc(Request $request)
@@ -60,20 +63,28 @@ class DocController extends Controller
 //        $username = input::get('username');
         $username = $request->project_name;
 //        $username = $request->URL('username');
-        $docs = Doc::where('project_name','=',$username)->get();
+        $docs = Doc::where('project_name', '=', $username)->get();
         $docs = $docs ? $docs : '';
-//        dd($docs);
-//        dd($username);
-        return view('doc.myDoc',['docs' => $docs]);
+        return view('doc.myDoc', ['docs' => $docs]);
     }
 
     public function seeDoc(Request $request)
     {
 //        $username = $_GET['username'];
-        $doc = Doc::where('doid','=',$request->doid)->first();
+        $doc = Doc::where('doid', '=', $request->doid)->first();
         $doc = $doc ? $doc : '';
         return $doc;
     }
+
+    //搜索文档
+    public function searchDoc(Request $request)
+    {
+        $key = $request->key;
+        $docs = Doc::where('title', 'like', '%' . $key . '%')->get();
+        $docs = $docs ? $docs : '';
+        return $docs;
+    }
+
 
 }
 
