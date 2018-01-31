@@ -6,35 +6,45 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/base.css">
+    {{--<link rel="stylesheet" href="css/base.css">--}}
     <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
     <title>home</title>
     <style>
-        body{
+        body {
             background-color: #f8f8f8;
         }
-        .line-1{
+
+        .inp {
+            position: relative;
+            top: 7px;
+        }
+
+        .line-1 {
             width: 100%;
             height: 3px;
-            background-color:#009a61;
+            background-color: #009a61;
         }
-        .line-2{
+
+        .line-2 {
             width: 100%;
             height: 2px;
             background-color: #f1f1f1;
             /*margin-bottom: 0px;*/
         }
-        .nav-list{
-            display:flex;
+
+        .nav-list {
+            display: flex;
             float: none;
             justify-content: center;
         }
-        .footer{
+
+        .footer {
             margin-top: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -60,37 +70,32 @@
                                 <a href="/tags" title="标签">标签</a>
                             </li>
                         </ul>
-                        <div class="searchbar pull-left visible-lg-inline-block visible-md-inline-block">
-                            <form class="form-inline" action="/search" method="get">
-                                <input class="form-control" name="keyword" type="search" style="width: 230px;" placeholder="请输入关键词..." value="">
-                                <button class="search-btn">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
+                        <div class="inp searchbar pull-left visible-lg-inline-block visible-md-inline-block">
+                            <input class="form-control keyword" style="width: 230px;" placeholder="请输入关键词..." value="">
                         </div>
                     </nav>
 
                     {{--<div class="btn-group dropdown-menu-right pull-right slidebar visible-xs-inline-block visible-sm-inline-block">--}}
-                        {{--<button class="btn btn-default dropdown-toggle hidden-lg" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i></button>--}}
-                        {{--<ul class="dropdown-menu" role="menu">--}}
+                    {{--<button class="btn btn-default dropdown-toggle hidden-lg" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i></button>--}}
+                    {{--<ul class="dropdown-menu" role="menu">--}}
 
-                            {{--<li>--}}
-                                {{--<a href="/setting" title="个人中心"><i class="fa fa-user" aria-hidden="true"></i> 个人中心</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="/book" title="我的项目"><i class="fa fa-book" aria-hidden="true"></i> 我的项目</a>--}}
-                            {{--</li>--}}
+                    {{--<li>--}}
+                    {{--<a href="/setting" title="个人中心"><i class="fa fa-user" aria-hidden="true"></i> 个人中心</a>--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                    {{--<a href="/book" title="我的项目"><i class="fa fa-book" aria-hidden="true"></i> 我的项目</a>--}}
+                    {{--</li>--}}
 
-                            {{--<li>--}}
-                                {{--<a href="/manager" title="管理后台"><i class="fa fa-university" aria-hidden="true"></i> 管理后台</a>--}}
-                            {{--</li>--}}
+                    {{--<li>--}}
+                    {{--<a href="/manager" title="管理后台"><i class="fa fa-university" aria-hidden="true"></i> 管理后台</a>--}}
+                    {{--</li>--}}
 
-                            {{--<li>--}}
-                                {{--<a href="/logout" title="退出登录"><i class="fa fa-sign-out"></i> 退出登录</a>--}}
-                            {{--</li>--}}
+                    {{--<li>--}}
+                    {{--<a href="/logout" title="退出登录"><i class="fa fa-sign-out"></i> 退出登录</a>--}}
+                    {{--</li>--}}
 
 
-                        {{--</ul>--}}
+                    {{--</ul>--}}
                     {{--</div>--}}
 
                 </div>
@@ -105,10 +110,11 @@
                     @else
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown ">
-                                <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
+                                <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}
+                                    &nbsp;&nbsp;<span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="min-width: 120px;">
                                     <li><a href="{{ Route('users.person') }}">个人中心</a></li>
-                                    <li><a href="myProject?username={{Cookie::get('username')}}">我的项目</a></li>
+                                    <li><a href="myProject?username={{ Cookie::get('username') }}">我的项目</a></li>
                                     @if((Cookie::get('username')) == 'admin')
                                         <li><a href="{{ Route('center') }}">管理后台</a></li>
                                     @endif
@@ -187,31 +193,33 @@
 </div>
 
 
-        {{--login register 的header--}}
-        <div class="log-header">
-            @section('log-header')
-                <div class="line" style="width: 100%;height: 2px;background-color:#009a61;"></div>
-                <div class="container">
-                    <nav class="navbar navbar-default" style="border: none;margin-bottom: 0">
-                        <div class="container-fluid">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                                <a class="navbar-brand" href="{{ Route('home') }}">文档管理系统</a>
-                            </div>
-
-                        </div>
-                    </nav>
+{{--login register 的header--}}
+<div class="log-header">
+    @section('log-header')
+        <div class="line" style="width: 100%;height: 2px;background-color:#009a61;"></div>
+        <div class="container">
+            <nav class="navbar navbar-default" style="border: none;margin-bottom: 0">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ Route('home') }}">文档管理系统</a>
+                    </div>
 
                 </div>
-                <div class="line" style="width: 100%;height: 2px;background-color: #f1f1f1;margin-bottom: 0px;margin-top: 0px;z-index: 10"></div>
-            @show
+            </nav>
+
         </div>
+        <div class="line"
+             style="width: 100%;height: 2px;background-color: #f1f1f1;margin-bottom: 0px;margin-top: 0px;z-index: 10"></div>
+    @show
+</div>
 
 {{--content  中间的内容--}}
 <div class="content">
@@ -225,7 +233,7 @@
     @section('footer')
         <nav class="navbar navbar-default ">
             <div class="container">
-                <ul class="nav navbar-nav nav-list"  >
+                <ul class="nav navbar-nav nav-list">
                     <li><a href="#">Link</a></li>
                     <li><a href="#">反馈意见</a></li>
                     <li><a href="#">Link</a></li>
@@ -236,15 +244,14 @@
 </div>
 
 
-
-        {{--login register 的footer--}}
+{{--login register 的footer--}}
 <div class="log-footer">
     @section('log-footer')
 
     @show
 </div>
-<script src="js/canvas.js">
+{{--<script src="js/canvas.js">--}}
 
-</script>
+{{--//</script>--}}
 </body>
 </html>

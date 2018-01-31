@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
+
     //显示主页
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::offset(0)->paginate(10);
         if (Cookie::has('username'))
         {
             //如果已经存在username

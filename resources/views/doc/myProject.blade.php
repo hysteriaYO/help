@@ -113,8 +113,8 @@
                 <button class="btn btn-success" data-toggle="modal" data-target="#myModal">添加项目</button>
             </div>
             <div class="project-list">
-
-            @foreach($projects as $project)
+                @if($projects)
+                    @foreach($projects as $project)
 
                     <div class="project-unit">
                         <div class="project-top">
@@ -141,7 +141,9 @@
                         </div>
                     </div>
                 @endforeach
-
+                @else
+                    <div class="">无相关内容</div>
+                @endif
             </div>
 
             {{--分页--}}
@@ -168,7 +170,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" placeholder="标题(不超过100字)" name="username" value="{{$project->username}}" id="bookName">
+{{--                                    <input type="hidden" class="form-control" placeholder="标题(不超过100字)" name="username" value="{{Cookie::get('username')}}" id="flag">--}}
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="标题(不超过100字)" name="project_name" id="bookName">
@@ -225,7 +227,7 @@
                 type: 'get',
                 data: $('#addBookDialogForm').serialize() ,
                 success:function (data) {
-                    console.log(data);
+//                    console.log(data);
                     $html='';
                     $('.project-list').html($html);
                     $.each(data,function (k,v) {
