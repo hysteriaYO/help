@@ -93,8 +93,8 @@ class HomeController extends Controller
     //显示用户列表
     public function showUserList()
     {
-        $users = User::all();
-        return view('admin.userlist',['users'=>$users]);
+        $datas = User::all();
+        return view('admin.userlist',['datas'=>$datas]);
     }
 
     //显示项目列表

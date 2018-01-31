@@ -11,7 +11,7 @@ class UserListController extends Controller
     public function userDelete(User $user)
     {
         User::detele($user);
-        $users = User::all();
-        return view('admin.userlist',['users'=>$users]);
+        $datas = User::all();
+        return view('admin.userlist',['datas'=>$datas]);
     }
 }

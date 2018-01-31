@@ -34,6 +34,10 @@
 
 @endsection
 
+@section('page-left')
+
+@endsection
+
 @section('footer')
     @parent
 @endsection

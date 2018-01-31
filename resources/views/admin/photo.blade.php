@@ -17,7 +17,7 @@
             <strong class="box-title">附件管理</strong>
         </div>
     </div>
-    <div class="box-body manager" style="padding-right: 200px;">
+    <div class="box-body manager">
         <div id="userList" class="users-list">
             <table class="table">
                 <thead>
@@ -39,7 +39,7 @@
                         <td> {{ $data->created_at }} </td>
                         <td> {{ $data->updated_at }} </td>
                         <td>
-                            <button type="button" onclick="delete(${{ $data->pid }})" class="btn btn-danger btn-sm">删除</button>
+                            <button id="btn-delete" type="button" onclick="delete(${{ $data->pid }})" class="btn btn-danger btn-sm">删除</button>
                             <a href="/detailed" class="btn btn-success btn-sm">详情</a>
                         </td>
                     </tr>
@@ -54,37 +54,44 @@
 
 @section('footer')
     @parent
+    <script>
+        //删除操作
+         function delete(id)
+        {
+            if (comfirm("确认删除")) {
+                window.event.returnValue = true;
+            } else {
+                window.event.returnValue = false;
+            }
+            // $(document).ready(function(){
+            //     alert(1)
+            // });
+            // $('.btn-delete').on('click',function(){
+            //     alert(1)
+            // });
+
+            if (window.event.returnValue == true) {
+                $.ajax({
+                    url: "{{ Route('photo.delete') }}",
+                    success: success,
+                    error: error,
+                    data: {id: id},
+                    type: 'delete',
+                    dataType: 'text'
+                })
+            } else {
+
+            }
+        }
+
+        function success(data){
+            $(".page-right").html(data);
+        }
+
+        function error(){
+            alert('删除失败！');
+        }
+    </script>
 @endsection
 
-<script type="text/javascript">
-    //删除操作
-     function delete(id){
-        print('111');
-        if (comfirm("确认删除")){
-            window.event.returnValue = true;
-        }else{
-            window.event.returnValue = false;
-        }
 
-        if(window.event.returnValue == true){
-            $.ajax({
-                url:"{{ Route('photo.delete') }}",
-                success:success,
-                error:error,
-                data:{id:id},
-                type:'delete',
-                dataType:'text'
-            })
-        }else{
-
-        }
-    }
-
-    function success(data){
-        $(".page-right").html(data);
-    }
-
-    function error(){
-        alert('删除失败！');
-    }
-</script>
