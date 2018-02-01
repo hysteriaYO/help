@@ -33,7 +33,7 @@ function validate(can) {
 }
 
 function random() {
-    var index = Math.round(Math.random()*61)
+    var index = Math.round(Math.random()*61);
     return index;
 }
 function toclick(dom) {

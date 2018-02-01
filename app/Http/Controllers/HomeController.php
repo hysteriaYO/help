@@ -23,17 +23,15 @@ class HomeController extends Controller
     public function index()
     {
         $projects = Project::offset(0)->paginate(10);
-        if (Cookie::has('username'))
-        {
+        if (Cookie::has('username')) {
             //如果已经存在username
             //$var = Cookie::get('username');
-            return view('home',['projects'=>$projects]);
-        }else
-        {
+            return view('home', ['projects' => $projects]);
+        } else {
             //设置游客身份
-            Cookie::queue('username','guest');
+            Cookie::queue('username', 'guest');
             //$var = Cookie::get('username');
-            return view('home',['projects'=>$projects]);
+            return view('home', ['projects' => $projects]);
         }
     }
 
@@ -55,18 +53,18 @@ class HomeController extends Controller
         return view('users.person');
     }
 
+    //显示修改密码界面
+    public function showUpdatePassword()
+    {
+        return view('users.updatePassword');
+    }
+
     //显示我的项目
     public function showMyProject()
     {
         $projects = Project::all()->where('username',Cookie::get('username'));
         return view('users.myProject',['projects'=>$projects]);
     }
-
-//    //显示管理后台
-//    public function showCenterForm()
-//    {
-//        return view('admin.center');
-//    }
 
     //显示仪表盘
     public function showBoardForm()
@@ -101,7 +99,7 @@ class HomeController extends Controller
     //显示项目列表
     public function showProjectList()
     {
-        $projects = Project::all();
-        return view('admin.projectlist',['projects'=>$projects]);
+        $datas = Project::all();
+        return view('admin.projectlist',['datas'=>$datas]);
     }
 }

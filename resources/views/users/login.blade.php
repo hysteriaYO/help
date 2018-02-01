@@ -3,29 +3,13 @@
 @include('layouts.loginHeader')
 
 @section('content')
+    <div class="content">
     <div class="container">
         <div class="login">
             <form action="" method="POST">
                 {{ csrf_field() }}
                 <h3 class="system">用户登录</h3>
                 <div class="form-group">
-                    {{--成功提示框--}}
-                    @foreach (['success'] as $msg)
-                        @if(session()->has($msg))
-                            <div class="flash-message">
-                                <p class="alert alert-{{ $msg }}">
-                                    {{ session()->get($msg) }}
-                                </p>
-                            </div>
-                        @endif
-                    @endforeach
-
-                    {{--出错提示框--}}
-                    @if (count($errors) > 0)
-                        @foreach ($errors->all() as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    @endif
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
@@ -65,7 +49,27 @@
                     还没有账号?<a href="{{ route('create') }}" title="立即注册">立即注册</a>
                 </div>
             </form>
+            {{--成功提示框--}}
+            @foreach (['success'] as $msg)
+                @if(session()->has($msg))
+                    <div class="flash-message">
+                        <p class="alert alert-{{ $msg }}">
+                            {{ session()->get($msg) }}
+                        </p>
+                    </div>
+                @endif
+            @endforeach
+
+            {{--出错提示框--}}
+            <p class="prompt">
+                @if (count($errors) > 0)
+                    @foreach ($errors->all() as $message)
+                        <span>{{ $message }}</span>
+                    @endforeach
+                @endif
+            </p>
         </div>
+    </div>
     </div>
 @endsection
 

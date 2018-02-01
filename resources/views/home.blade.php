@@ -34,16 +34,11 @@
 {{--@extends('base')--}}
 @extends('layouts.basic')
 
-@section('title','home')
-
 @include('layouts.header')
 
-@section('log-header')
-
-@endsection
 
 @section('content')
-
+    <div class="content">
     <div class="home-box">
         <div class="container home-content">
             @foreach($projects as $project)
@@ -65,16 +60,14 @@
             {{$projects->links()}}
         </div>
     </div>
-
-
-@endsection
-
-@section('page-left')
+    </div>
 
 @endsection
+
 
 @section('footer')
     @parent
+    {{--获取项目和搜索--}}
     <script>
         $(document).ready(function () {
             $('.keyword').on('keypress', function (e) {
@@ -120,11 +113,5 @@
             });
         });
     </script>
-
-@endsection
-
-@section('log-footer')
-
-
 
 @endsection

@@ -1,11 +1,9 @@
 @extends('layouts.basic')
 
-@section('header')
-
-    @endsection
+@include('layouts.loginHeader')
 
 @section('content')
-
+    <div class="content">
     <div class="container">
         <div class="login">
             <form action="" method="POST">
@@ -70,5 +68,6 @@
             </div>
         </form>
         </div>
+    </div>
     </div>
 @endsection
