@@ -86,21 +86,17 @@
     }
 
 </style>
+
+<style>
+    .content{
+        height: 100%;
+    }
+
+</style>
+
 @extends('layouts.basic')
 
-@section('head')
-
-@endsection
-
-@section('title','myProject')
-
-@section('header')
-    @parent
-@endsection
-
-@section('log-header')
-
-@endsection
+@include('layouts.header')
 
 @section('content')
     <div class="container content-project">

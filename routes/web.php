@@ -68,5 +68,4 @@ Route::group(['middleware' => ['web']], function () {
         return view('users.project',['projects'=>$projects]);
     });
 
-
 });
