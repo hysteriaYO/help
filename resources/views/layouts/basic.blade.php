@@ -16,35 +16,29 @@
         body {
             background-color: #f8f8f8;
         }
-
         .inp {
             position: relative;
             top: 7px;
         }
-
         .line-1 {
             width: 100%;
             height: 3px;
             background-color: #009a61;
         }
-
         .line-2 {
             width: 100%;
             height: 2px;
             background-color: #f1f1f1;
             /*margin-bottom: 0px;*/
         }
-
         .nav-list {
             display: flex;
             float: none;
             justify-content: center;
         }
-
         .footer {
             margin-top: 20px;
         }
-
     </style>
 </head>
 <body>

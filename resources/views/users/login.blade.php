@@ -1,18 +1,6 @@
 @extends('layouts.basic')
 
-@section('header')
-
-    @endsection
-
-{{--@section('log-header')--}}
-    {{--<nav class="navbar">--}}
-        {{--<div class="container">--}}
-            {{--<div class="navbar-header col-sm-12 col-md-6 col-lg-5">--}}
-                {{--<a href="goMain">helpMain</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</nav>--}}
-{{--@endsection--}}
+@include('layouts.loginHeader')
 
 @section('content')
     <div class="container">

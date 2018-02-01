@@ -19,8 +19,9 @@ class PhotoController extends Controller
     {
         if ($request->isMethod('POST'))
         {
-            //var_dump($_FILES);
-            $photo = $request->file('photo');
+//            var_dump($_FILES);
+//            exit;
+            $photo = $request->file('file');
 
             if ($photo->isValid())
             {
@@ -43,6 +44,10 @@ class PhotoController extends Controller
                     echo '只允许上传jpg/png/jpeg格式的图片';
                 }
             }
+        }
+        else
+        {
+            return view('upload');
         }
     }
 

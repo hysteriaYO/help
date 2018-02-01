@@ -12,6 +12,6 @@ class UserListController extends Controller
     {
         User::detele($user);
         $datas = User::all();
-        return view('admin.userlist',['datas'=>$datas]);
+        return view('userlist',['datas'=>$datas]);
     }
 }

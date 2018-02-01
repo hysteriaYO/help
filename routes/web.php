@@ -11,7 +11,7 @@
 |
 */
 
-//Route::any('upload','admin\PhotoController@showPhotoForm');        //图片上传
+Route::any('upload','admin\PhotoController@upload');        //图片上传
 
 //Route::any('usergroup','admin\DashboardController@show');        //用户管理
 

@@ -36,9 +36,7 @@
 
 @section('title','home')
 
-@section('header')
-    @parent
-@endsection
+@include('layouts.header')
 
 @section('log-header')
 
