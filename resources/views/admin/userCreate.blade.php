@@ -22,7 +22,7 @@
                 <div class="page-right">
                     <div class="m-box">
                         <div class="box-head">
-                            <strong class="box-title">编辑项目</strong>
+                            <strong class="box-title">创建用户</strong>
                         </div>
                     </div>
                     <div class="box-body" style="padding-right: 200px;">
@@ -30,32 +30,32 @@
                             <form action="" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>作者</label>
-                                    <input type="text" class="form-control disabled" value="{{ $datas->username }}" disabled>
+                                    <label>用户名<strong class="text-danger">*</strong></label>
+                                    <input type="text" class="form-control" name="username" value="" placeholder="用户名长度不得小于6字符，不得超过40个字符。">
                                 </div>
                                 <div class="form-group">
-                                    <label>项目名<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="{{ $datas->project_name }}" name="projectName" max="100" placeholder="项目名称，必填" required>
+                                    <label for="password">密码<strong class="text-danger">*</strong></label>
+                                    <input type="password" class="form-control" id="password" name="password" max="100" placeholder="密码长度不得小于6字符，不得超过40个字符，必须完全是字母、数字。">
                                 </div>
                                 <div class="form-group">
-                                    <label>公司名称<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="{{ $datas->company_name }}" name="companyName" max="100" placeholder="公司名称，必填" required>
+                                    <label for="password_confirmation">确认密码<strong class="text-danger">*</strong></label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" maxlength="20" >
                                 </div>
                                 <div class="form-group">
-                                    <label>公司电话<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" name="companyPhone" value="{{ $datas->company_phone }}" placeholder="公司联系方式，必填" required>
+                                    <label for="user-email">邮箱<strong class="text-danger">*</strong></label>
+                                    <input type="email" class="form-control" value="" id="userEmail" name="email" max="100"  required>
                                 </div>
                                 <div class="form-group">
-                                    <label>邮箱<strong class="text-danger">*</strong></label>
-                                    <input type="email" class="form-control" value="{{ $datas->company_email }}"  name="companyEmail" max="100" placeholder="公司邮箱，必填" required>
+                                    <label>手机号</label>
+                                    <input type="text" class="form-control" id="userPhone" name="phone" size="11" title="手机号码" value="" >
                                 </div>
                                 <div class="form-group">
                                     <label class="description">描述</label>
-                                    <textarea class="form-control" rows="3" title="描述" name="description" id="description" maxlength="500">{{ $datas->description }}</textarea>
+                                    <textarea class="form-control" rows="3" title="描述" name="description" id="description" maxlength="500"></textarea>
                                     <p style="color: #999;font-size: 12px;">描述不能超过500字</p>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success" >保存修改</button>
+                                    <button type="submit" class="btn btn-success" >创建用户</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
                                 {{--提示框--}}

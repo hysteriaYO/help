@@ -11,7 +11,7 @@
 |
 */
 
-Route::any('upload','admin\PhotoController@upload');        //图片上传
+Route::any('upload','admin\FileController@upload');        //图片上传
 
 Route::group(['middleware' => ['web']], function () {
 
@@ -35,17 +35,23 @@ Route::group(['middleware' => ['web']], function () {
 
     //admin后台管理
     Route::get('dashboard', 'HomeController@showBoardForm')->name('dashboard');  //仪表盘
-    Route::get('photo', 'HomeController@showPhotoForm')->name('photo');          //附件列表
-    Route::get('userlist', 'HomeController@showUserList')->name('userlist');     //用户列表
+
+    Route::get('fileList', 'HomeController@showPhotoForm')->name('fileList');          //附件列表
+    Route::post('deleteFile={id}', 'admin\fileListController@adminDelete');             //admin删除附件
+
+    Route::get('userList', 'HomeController@showUserList')->name('userList');     //用户列表
     Route::get('userId={id}', 'HomeController@showUserEdit');                     //admin修改用户信息页面
     Route::post('userId={id}', 'admin\UserListController@adminEdit');
     Route::post('deleteUser={id}', 'admin\UserListController@adminDelete');
-    Route::get('projectlist', 'HomeController@showProjectList')->name('projectlist');    //项目列表
-    Route::get('projectId={id}', 'HomeController@showProjectEdit');                     //admin修改项目信息页面
-    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');
+    Route::get('createUser','HomeController@showUserCreate');                       //admin创建用户
+    Route::post('createUser','admin\UserListController@adminCreate');
 
-    //附件管理
-    Route::post('photo', 'admin\PhotoController@delete')->name('photodelete');  //删除附件
+    Route::get('projectList', 'HomeController@showProjectList')->name('projectList');    //项目列表
+    Route::get('projectId={id}', 'HomeController@showProjectEdit');                     //admin修改项目信息页面
+    Route::post('projectId={id}', 'admin\ProjectListController@adminEdit');
+    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');
+    Route::get('createProject','HomeController@showProjectCreate');                     //admin创建项目
+    Route::post('createProject','admin\ProjectListController@adminCreate');
 
 
 

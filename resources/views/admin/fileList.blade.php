@@ -40,20 +40,23 @@
                                 </thead>
                                 <tbody>
                                 @forelse($datas as $data)
-                                    <tr>
-                                        <td> {{ $data->pid }} </td>
-                                        <td> {{ $data->photo_name }} </td>
-                                        <td> {{ $data->project_name }} </td>
-                                        <td> {{ $data->created_at }} </td>
-                                        <td> {{ $data->updated_at }} </td>
-                                        <td>
-                                            <button id="btn-delete" type="button" onclick="delete(${{ $data->pid }})" class="btn btn-danger btn-sm">删除</button>
-                                            <a href="/detailed" class="btn btn-success btn-sm">详情</a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <span>Nothing.</span>
-                                @endforelse
+                                    <form action="deleteFile={{ $data->pid }}" method="post" >
+                                        {{ csrf_field() }}
+                                        <tr>
+                                            <td> {{ $data->pid }} </td>
+                                            <td> {{ $data->photo_name }} </td>
+                                            <td> {{ $data->project_name }} </td>
+                                            <td> {{ $data->created_at }} </td>
+                                            <td> {{ $data->updated_at }} </td>
+                                            <td>
+                                                <button  type="submit" class="btn btn-danger btn-sm">删除</button>
+                                                <a href="/detailed" class="btn btn-success btn-sm">详情</a>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    @empty
+                                    @endforelse
+
                                 </tbody>
                             </table>
                         </div>

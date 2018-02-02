@@ -61,56 +61,13 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="form-right">
-                            <label>
-                                <a href="javascript:;" data-toggle="modal" data-target="#upload-logo-panel">
-                                    <img src="" onerror="" class="img-circle" alt="头像" style="max-width: 120px;max-height: 120px;" id="headimgurl">
-                                </a>
-                            </label>
-                        </div>
                     </div>
-                </div>
                 <!--        基本信息右边栏 end-->
 
             </div>
         </div>
 
-        <!--修改头像 start-->
-        <div class="modal fade" id="upload-logo-panel" tabindex="-1" role="dialog" aria-labelledby="修改头像" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">修改头像</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="wraper">
-                            <div id="image-wraper">
 
-                            </div>
-                        </div>
-                        <div class="watch-crop-list">
-                            <div class="preview-title">预览</div>
-                            <ul>
-                                <li>
-                                    <div class="img-preview preview-lg"></div>
-                                </li>
-                                <li>
-                                    <div class="img-preview preview-sm"></div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div style="clear: both"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <span id="error-message"></span>
-                        <div id="filePicker" class="btn">选择</div>
-                        <button type="button" id="saveImage" class="btn btn-success" style="height: 40px;width: 77px;" data-loading-text="上传中...">上传</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 @section('footer')
     @parent

@@ -27,6 +27,7 @@ class UsersController extends Controller
         $credentials = $this->validate($request,[
             'username' => 'required|max:40',
             'password' => 'required',
+            'vericode' => 'required|confirmed'
         ]);
 
         //用户名、密码匹配
@@ -65,7 +66,7 @@ class UsersController extends Controller
         //字段范围检测，不能有空字段，不在范围的字段
         $this->validate($request,[
             'username' => 'required|unique:users|max:40',
-            'password' => 'required|confirmed|min:6|max:40',
+            'password' => 'required|confirmed|min:6|max:40|alpha_num',
             'email' => 'required|email|max:40'
         ]);
 

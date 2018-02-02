@@ -22,7 +22,10 @@ class Project extends Model
      */
     protected $fillable = [
         'project_name',
-        'doc_num',
-        'username'
+        'username',
+        'company_name',
+        'company_phone',
+        'company_email',
+        'description',
     ];
 }

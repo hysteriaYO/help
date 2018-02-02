@@ -22,11 +22,11 @@
                 <div class="page-right">
                     <div class="m-box">
                         <div class="box-head">
-                            <strong class="box-title">项目管理</strong>
-                            <button type="button" class="btn btn-success btn-sm pull-right">
+                            <strong class="box-title">用户管理</strong>
+                            <a href="createUser" type="button" class="btn btn-success btn-sm pull-right">
                                 <span class="glyphicon glyphicon-plus"></span>
-                                添加项目
-                            </button>
+                                添加用户
+                            </a>
                         </div>
                     </div>
                     <div class="box-body manager">
@@ -35,29 +35,31 @@
                                 <thead>
                                 <tr>
                                     <th width="80">ID</th>
-                                    <th width="80">项目名</th>
-                                    <th>文档数量</th>
+                                    <th width="80">用户名</th>
+                                    <th>邮箱</th>
                                     <th>创建时间</th>
                                     <th>更新时间</th>
+                                    {{--<th>状态</th>--}}
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($datas as $data)
-                                    <form action="deleteProject={{ $data->id }}" method="post" >
+                                    <form action="deleteUser={{ $data->uid }}" method="post" >
                                         {{ csrf_field() }}
-                                    <tr>
-                                        <td>{{ $data->id }}</td>
-                                        <td>{{ $data->project_name }}</td>
-                                        <td>{{ $data->doc_num }}</td>
-                                        <td> {{ $data->created_at }} </td>
-                                        <td> {{ $data->updated_at }} </td>
-                                        <td>
-                                            <a href="projectId={{ $data->id }}" class="btn btn-sm btn-default">编辑项目</a>
-                                            <a type="button" class="btn btn-success btn-sm">查看文档</a>
-                                            <button type="submit" class="btn btn-danger btn-sm">删除项目</button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $data->uid }}</td>
+                                            <td>{{ $data->username }}</td>
+                                            <td>{{ $data->email }}</td>
+                                            <td> {{ $data->created_at }} </td>
+                                            <td> {{ $data->updated_at }} </td>
+                                            {{--<td><span class="label label-danger">禁用</span></td>--}}
+                                            <td>
+                                                <a href="userId={{ $data->uid }}" class="btn btn-sm btn-default">编辑</a>
+                                                {{--<button type="button" class="btn btn-success btn-sm">禁用</button>--}}
+                                                <button type="submit" id="{{ $data->uid }}" name="{{ $data->uid }}" class="btn btn-danger btn-sm">删除</button>
+                                            </td>
+                                        </tr>
                                     </form>
                                 @empty
                                 @endforelse
@@ -75,5 +77,3 @@
 @section('footer')
     @parent
 @endsection
-
-

@@ -4,7 +4,7 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Photo extends Model
+class File extends Model
 {
     /**
      * 规定表名、主键
@@ -12,7 +12,7 @@ class Photo extends Model
      * 郭俊秀
      * @var string
      */
-    protected $table = 'photos';
+    protected $table = 'files';
     protected $primaryKey = 'pid';
     public $timestamps = true;
 

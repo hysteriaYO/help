@@ -2,33 +2,48 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\model\Photo;
+use App\model\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * Class PhotoController
+ * Class FileListController
  * @package App\Http\Controllers\admin
  * 郭俊秀
  * PhotoController用来进行对附件的相关操作，操作：上传、查看、删除
  */
-class PhotoController extends Controller
+class FileListController extends Controller
 {
+
+    public function adminDelete($id,Request $request)
+    {
+        $datas = File::find($id);
+        $bool = $datas->delete();
+        if ($bool)
+        {
+            $request->session()->flash('success','修改成功！');
+        }else
+        {
+            $request->session()->flash('warning','修改失败！');
+        }
+        return redirect()->back();
+    }
+
     public function upload(Request $request)
     {
         if ($request->isMethod('POST'))
         {
 //            var_dump($_FILES);
 //            exit;
-            $photo = $request->file('file');
+            $file = $request->file('file');
 
-            if ($photo->isValid())
+            if ($file->isValid())
             {
-                $ext = $photo->getClientOriginalExtension();
-                $type = $photo->getClientMimeType();
-                $realPath = $photo->getRealPath();
+                $ext = $file->getClientOriginalExtension();
+                $type = $file->getClientMimeType();
+                $realPath = $file->getRealPath();
                 //echo $type;
                 //exit;
                 $imageArray = ['png','jpg','jpeg'];
@@ -40,10 +55,10 @@ class PhotoController extends Controller
                     $filename = uniqid().'.'.$ext;
                     $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
                     //图片上传成功
-                  //如果是项目封面
+                    //如果是项目封面
                     if ($request->has('projectName'))
                     {
-                        Photo::create([
+                        File::create([
                             'photo_name'=>$filename,
                             'username_name'=>Cookie::get('username'),
                             'prject_name'=>$request->get('projectName')
@@ -51,7 +66,7 @@ class PhotoController extends Controller
                     }
                     else
                     {
-                        Photo::create([
+                        File::create([
                             'photo_name'=>$filename,
                             'username_name'=>Cookie::get('username')
                         ]);
@@ -63,7 +78,7 @@ class PhotoController extends Controller
                     $filename = uniqid().'.'.$ext;
                     $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
 
-                    Photo::create([
+                    File::create([
                         'photo_name'=>$filename,
                         'username_name'=>Cookie::get('username'),
                         'prject_name'=>$request->get('projectName')
@@ -78,13 +93,4 @@ class PhotoController extends Controller
         }
     }
 
-    public function delete(Request $request)
-    {
-        echo 1;
-        if ($request->isMethod('POST'))
-        {
-            $photoId = $request->get('pid');
-
-        }
-    }
 }
