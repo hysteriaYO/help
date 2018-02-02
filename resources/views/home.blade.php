@@ -60,7 +60,7 @@
             {{$projects->links()}}
         </div>
     </div>
-    </div>
+
 
 @endsection
 

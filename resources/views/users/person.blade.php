@@ -1,4 +1,3 @@
-
 <style>
     .content{
         height: 100%;
@@ -8,9 +7,12 @@
 
 @extends('layouts.basic')
 
-@include('layouts.header')
+@section('header')
+    @include('layouts.header')
+@endsection
 
 @section('content')
+
     <div class="content">
 
         <div class="container manual-body">
@@ -34,26 +36,27 @@
                     </div>
                     <div class="box-body" style="padding-right: 200px;">
                         <div class="form-left">
-                            <form role="form" method="post" id="memberInfoForm">
+                            <form action="" method="POST">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>用户名</label>
-                                    <input type="text" class="form-control disabled" value="admin" disabled>
+                                    <input type="text" class="form-control disabled" value="{{ $datas->username }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="user-email">邮箱<strong class="text-danger">*</strong></label>
-                                    <input type="email" class="form-control" value="admin@iminho.me" id="userEmail" name="email" max="100" placeholder="邮箱">
+                                    <input type="email" class="form-control" value="{{ $datas->email }}" id="userEmail" name="email" max="100" placeholder="邮箱" required>
                                 </div>
                                 <div class="form-group">
                                     <label>手机号</label>
-                                    <input type="text" class="form-control" id="userPhone" name="phone" maxlength="20" title="手机号码" placeholder="手机号码" value="啊啊啊">
+                                    <input type="text" class="form-control" id="userPhone" name="phone" maxlength="20" title="手机号码" placeholder="手机号码" value="{{ $datas->phone }}" >
                                 </div>
                                 <div class="form-group">
                                     <label class="description">描述</label>
-                                    <textarea class="form-control" rows="3" title="描述" name="description" id="description" maxlength="500">哈哈哈</textarea>
+                                    <textarea class="form-control" rows="3" title="描述" name="description" id="description" maxlength="500">{{ $datas->description }}</textarea>
                                     <p style="color: #999;font-size: 12px;">描述不能超过500字</p>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success" data-loading-text="保存中...">保存修改</button>
+                                    <button type="submit" class="btn btn-success" >保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
                             </form>

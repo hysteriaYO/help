@@ -1,4 +1,3 @@
-
 <style>
     .content{
         height: 100%;
@@ -8,13 +7,12 @@
 
 @extends('layouts.basic')
 
-@include('layouts.header')
-
-@section('page-right')
-
+@section('header')
+    @include('layouts.header')
 @endsection
 
 @section('content')
+
     <div class="content">
         <div class="container manual-body">
             <div class="row">
@@ -41,25 +39,28 @@
                                     <th>邮箱</th>
                                     <th>创建时间</th>
                                     <th>更新时间</th>
-                                    <th>状态</th>
+                                    {{--<th>状态</th>--}}
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($datas as $data)
-                                    <tr>
-                                        <td>{{ $data->uid }}</td>
-                                        <td>{{ $data->username }}</td>
-                                        <td>{{ $data->email }}</td>
-                                        <td> {{ $data->created_at }} </td>
-                                        <td> {{ $data->updated_at }} </td>
-                                        <td><span class="label label-danger">禁用</span></td>
-                                        <td>
-                                            <a href="/manager/users/edit" class="btn btn-sm btn-default">编辑</a>
-                                            <button type="button" class="btn btn-success btn-sm">禁用</button>
-                                            <button type="button" class="btn btn-danger btn-sm">删除</button>
-                                        </td>
-                                    </tr>
+                                    <form action="deleteUser={{ $data->uid }}" method="post" >
+                                        {{ csrf_field() }}
+                                        <tr>
+                                            <td>{{ $data->uid }}</td>
+                                            <td>{{ $data->username }}</td>
+                                            <td>{{ $data->email }}</td>
+                                            <td> {{ $data->created_at }} </td>
+                                            <td> {{ $data->updated_at }} </td>
+                                            {{--<td><span class="label label-danger">禁用</span></td>--}}
+                                            <td>
+                                                <a href="userId={{ $data->uid }}" class="btn btn-sm btn-default">编辑</a>
+                                                {{--<button type="button" class="btn btn-success btn-sm">禁用</button>--}}
+                                                <button type="submit" id="{{ $data->uid }}" name="{{ $data->uid }}" class="btn btn-danger btn-sm">删除</button>
+                                            </td>
+                                        </tr>
+                                    </form>
                                 @empty
                                 @endforelse
                                 </tbody>

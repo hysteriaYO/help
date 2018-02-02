@@ -1,4 +1,3 @@
-
 <style>
     .content{
         height: 100%;
@@ -8,9 +7,12 @@
 
 @extends('layouts.basic')
 
-@include('layouts.header')
+@section('header')
+    @include('layouts.header')
+@endsection
 
 @section('content')
+
     <div class="content">
 
         <div class="container manual-body">
@@ -34,23 +36,34 @@
                     </div>
                     <div class="box-body" style="padding-right: 200px;">
                         <div class="form-left">
-                            <form role="form" method="post" id="memberInfoForm">
+                            <form method="post" enctype="multipart/form-data" action="">
+                                {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="password1">原始密码</label>
-                                    <input name="password1" type="password" id="password1" class="form-control disabled" placeholder="原始密码">
+                                    <label for="oldpassword">原始密码</label>
+                                    <input name="oldpassword" type="password" id="oldpassword" class="form-control disabled" placeholder="原始密码">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password2">新密码</label>
-                                    <input type="password" class="form-control" id="password2" name="email" max="100" placeholder="新密码">
+                                    <label for="password">新密码</label>
+                                    <input type="password" class="form-control" id="password" name="password" max="100" placeholder="新密码">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password3">确认密码</label>
-                                    <input type="password" class="form-control" id="password3" name="password3" maxlength="20" placeholder="确认密码">
+                                    <label for="password_confirmation">确认密码</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" maxlength="20" placeholder="确认密码">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success" data-loading-text="保存中...">保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
+                                {{--提示框--}}
+                                @foreach (['success','warning'] as $msg)
+                                    @if(session()->has($msg))
+                                        <div class="flash-message">
+                                            <p class="alert alert-{{ $msg }}">
+                                                {{ session()->get($msg) }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </form>
                         </div>
                     </div>

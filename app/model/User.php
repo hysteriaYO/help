@@ -25,7 +25,8 @@ class User extends Model
         'password',
         'email',
         'remember_token',
-        'phone'
+        'phone',
+        'description'
     ];
 
     /**

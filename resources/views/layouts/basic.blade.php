@@ -45,7 +45,9 @@
 <body>
 {{--唐利华--}}
 
+@section('header')
 
+@show
 {{--content  中间的内容--}}
 <div class="content">
 @section('content')

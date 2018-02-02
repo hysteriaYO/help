@@ -7,6 +7,7 @@ use App\model\Photo;
 use App\model\Project;
 use App\model\User;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Cookie;
 
 /**
@@ -50,7 +51,8 @@ class HomeController extends Controller
     //显示个人中心
     public function showPersonSpace()
     {
-        return view('users.person');
+        $datas = User::all()->where('username',Cookie::get('username'))->first();
+        return view('users.person',['datas'=>$datas]);
     }
 
     //显示修改密码界面
@@ -101,5 +103,19 @@ class HomeController extends Controller
     {
         $datas = Project::all();
         return view('admin.projectlist',['datas'=>$datas]);
+    }
+
+    //显示admin修改用户界面
+    public function showUserEdit($id)
+    {
+        $datas = User::find($id);
+        return view('admin.userEdit',['datas'=>$datas]);
+    }
+
+    //显示admin修改项目界面
+    public function showProjectEdit($id)
+    {
+        $datas = Project::find($id);
+        return view('admin.projectEdit',['datas'=>$datas]);
     }
 }

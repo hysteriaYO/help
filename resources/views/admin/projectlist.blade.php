@@ -1,4 +1,3 @@
-
 <style>
     .content{
         height: 100%;
@@ -8,13 +7,12 @@
 
 @extends('layouts.basic')
 
-@include('layouts.header')
-
-@section('page-right')
-
+@section('header')
+    @include('layouts.header')
 @endsection
 
 @section('content')
+
     <div class="content">
         <div class="container manual-body">
             <div class="row">
@@ -46,6 +44,8 @@
                                 </thead>
                                 <tbody>
                                 @forelse($datas as $data)
+                                    <form action="deleteProject={{ $data->id }}" method="post" >
+                                        {{ csrf_field() }}
                                     <tr>
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->project_name }}</td>
@@ -53,11 +53,12 @@
                                         <td> {{ $data->created_at }} </td>
                                         <td> {{ $data->updated_at }} </td>
                                         <td>
-                                            <a href="/manager/users/edit" class="btn btn-sm btn-default">编辑项目</a>
-                                            <button type="button" class="btn btn-success btn-sm">查看文档</button>
-                                            <button type="button" class="btn btn-danger btn-sm">删除项目</button>
+                                            <a href="projectId={{ $data->id }}" class="btn btn-sm btn-default">编辑项目</a>
+                                            <a type="button" class="btn btn-success btn-sm">查看文档</a>
+                                            <button type="submit" class="btn btn-danger btn-sm">删除项目</button>
                                         </td>
                                     </tr>
+                                    </form>
                                 @empty
                                 @endforelse
                                 </tbody>

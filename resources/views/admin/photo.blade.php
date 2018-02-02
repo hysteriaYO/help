@@ -1,4 +1,3 @@
-
 <style>
     .content{
         height: 100%;
@@ -8,13 +7,12 @@
 
 @extends('layouts.basic')
 
-@include('layouts.header')
-
-@section('page-right')
-
+@section('header')
+    @include('layouts.header')
 @endsection
 
 @section('content')
+
     <div class="content">
         <div class="container manual-body">
             <div class="row">

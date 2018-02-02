@@ -16,16 +16,6 @@ class Doc extends Model
     protected $primaryKey = 'doid';
     public $timestamps = true;
 
-//    protected function getDateFormat()
-//    {
-//        return time();
-//    }
-//
-//    protected function asDateTime($value)
-//    {
-//        return $value;
-//    }
-
     /**
      * 以下字段可插入
      * @var array

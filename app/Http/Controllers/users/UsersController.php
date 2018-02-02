@@ -84,15 +84,58 @@ class UsersController extends Controller
         return redirect()->route('login');
     }
 
-    //用户编辑
-    public function edit()
+    //编辑用户信息
+    public function edit(Request $request)
     {
-        return view('users.person');
+        //字段范围检测，不能有空字段，不在范围的字段
+        $credentials = $this->validate($request,[
+            'email' => 'required|email',
+            'phone' => 'nullable|numeric|max:40',
+            'description' => 'nullable|max:255',
+        ]);
+
+        //符合要求的数据存入数据库
+        $datas = User::where('username',Cookie::get('username'))->first();
+        $datas->email = $request->get('email');
+        if ($request->get('phone'))
+        {
+            $datas->phone = $request->get('phone');
+        }
+        if ($request->get('description'))
+        {
+            $datas->description = $request->get('description');
+        }
+        $datas->save();
+
+        return view('users.person',['datas'=>$datas]);
     }
 
-    //用户更新
-    public function update()
+    //用户更新密码
+    public function update(Request $request)
     {
-        return redirect()->route('users.person');
+        //字段范围检测，不能有空字段，不在范围的字段
+        $credentials = $this->validate($request,[
+            'oldpassword' => 'required|min:6|max:40',
+            'password' => 'required|confirmed|min:6|max:40'
+        ]);
+
+        //用户名、密码匹配
+        $datas = User::where('username',Cookie::get('username'))->first();
+        if ($datas == null)
+        {
+            //不可能出现
+            return redirect()->back();
+        }
+        if (Hash::check($request->get('oldpassword'),$datas->password))
+        {
+            $datas->password = bcrypt($request->get('password'));
+            $datas->save();
+            $request->session()->flash('success','修改密码成功！');
+        }else
+        {
+            $request->session()->flash('warning','密码错误，请重新输入！');
+        }
+        return redirect()->back();
     }
+
 }

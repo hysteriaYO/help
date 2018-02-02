@@ -11,7 +11,7 @@
 |
 */
 
-//Route::any('upload','admin\PhotoController@upload');        //图片上传
+Route::any('upload','admin\PhotoController@upload');        //图片上传
 
 Route::group(['middleware' => ['web']], function () {
 
@@ -22,23 +22,34 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('person', 'HomeController@showPersonSpace')->name('user.show');  //显示用户空间
     Route::get('project', 'HomeController@showMyProject')->name('users.project');  //显示用户项目
     Route::get('center', 'HomeController@showCenterForm')->name('center');   //后台管理
-    Route::get('/home', 'users\UsersController@logout')->name('user.logOut'); //用户退出
+    Route::get('home', 'users\UsersController@logout')->name('user.logOut'); //用户退出
 
     //用户
     Route::get('login', 'HomeController@showLoginForm')->name('login');  //用户登录
     Route::post('login', 'users\UsersController@login');
     Route::get('create', 'HomeController@showCreateForm')->name('create'); //用户注册
     Route::post('create', 'users\UsersController@create');
-    Route::get('updatePassword', 'HomeController@showUpdatePassword')->name('user.password');         //显示修改密码页面
+    Route::get('updatePassword', 'HomeController@showUpdatePassword')->name('user.password');         //显示修改密码页
+    Route::post('person', 'users\UsersController@edit');         //编辑用户信息
+    Route::post('updatePassword', 'users\UsersController@update');          //修改密码
 
     //admin后台管理
     Route::get('dashboard', 'HomeController@showBoardForm')->name('dashboard');  //仪表盘
     Route::get('photo', 'HomeController@showPhotoForm')->name('photo');          //附件列表
     Route::get('userlist', 'HomeController@showUserList')->name('userlist');     //用户列表
+    Route::get('userId={id}', 'HomeController@showUserEdit');                     //admin修改用户信息页面
+    Route::post('userId={id}', 'admin\UserListController@adminEdit');
+    Route::post('deleteUser={id}', 'admin\UserListController@adminDelete');
     Route::get('projectlist', 'HomeController@showProjectList')->name('projectlist');    //项目列表
+    Route::get('projectId={id}', 'HomeController@showProjectEdit');                     //admin修改项目信息页面
+    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');
 
     //附件管理
     Route::post('photo', 'admin\PhotoController@delete')->name('photodelete');  //删除附件
+
+
+
+
 
     //模板页
     Route::get('base', 'DocController@base');

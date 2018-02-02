@@ -1,6 +1,9 @@
+
 @extends('layouts.basic')
 
-@include('layouts.loginHeader')
+@section('header')
+    @include('layouts.loginHeader')
+@endsection
 
 @section('content')
     <div class="content">
