@@ -37,7 +37,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('dashboard', 'HomeController@showBoardForm')->name('dashboard');  //仪表盘
 
     Route::get('fileList', 'HomeController@showPhotoForm')->name('fileList');          //附件列表
+    Route::get('fileId={id}','HomeController@showFileInfo');                        //admin查看附件详情
+    Route::post('fileId={id}','admin\fileListController@adminShow');
     Route::post('deleteFile={id}', 'admin\fileListController@adminDelete');             //admin删除附件
+    Route::get('uploadFile','HomeController@showFileUpload');                       //admin上传附件
+    Route::post('uploadFile','admin\fileListController@adminUpload');
 
     Route::get('userList', 'HomeController@showUserList')->name('userList');     //用户列表
     Route::get('userId={id}', 'HomeController@showUserEdit');                     //admin修改用户信息页面
@@ -49,7 +53,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('projectList', 'HomeController@showProjectList')->name('projectList');    //项目列表
     Route::get('projectId={id}', 'HomeController@showProjectEdit');                     //admin修改项目信息页面
     Route::post('projectId={id}', 'admin\ProjectListController@adminEdit');
-    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');
+    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');       //admin删除项目
     Route::get('createProject','HomeController@showProjectCreate');                     //admin创建项目
     Route::post('createProject','admin\ProjectListController@adminCreate');
 

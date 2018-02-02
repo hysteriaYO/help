@@ -23,6 +23,10 @@
                     <div class="m-box">
                         <div class="box-head">
                             <strong class="box-title">附件管理</strong>
+                            <a href="uploadFile" type="button" class="btn btn-success btn-sm pull-right">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                上传附件
+                            </a>
                         </div>
                     </div>
                     <div class="box-body manager">

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class FileListController extends Controller
 {
-
+    //删除附件
     public function adminDelete($id,Request $request)
     {
         $datas = File::find($id);
@@ -31,66 +31,126 @@ class FileListController extends Controller
         return redirect()->back();
     }
 
-    public function upload(Request $request)
+    //显示附件详情
+    public function adminShow()
     {
-        if ($request->isMethod('POST'))
+        echo 'adminShow';
+    }
+
+    //admin上传附件
+    public function adminUpload(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file->isValid())
         {
-//            var_dump($_FILES);
-//            exit;
-            $file = $request->file('file');
+            $ext = $file->getClientOriginalExtension();
+            $type = $file->getClientMimeType();
+            $realPath = $file->getRealPath();
+            //echo $type;
+            //exit;
+            $imageArray = ['png','jpg','jpeg'];
+            $textArray = ['html','md'];
 
-            if ($file->isValid())
+            if (in_array("$ext",$imageArray))
             {
-                $ext = $file->getClientOriginalExtension();
-                $type = $file->getClientMimeType();
-                $realPath = $file->getRealPath();
-                //echo $type;
-                //exit;
-                $imageArray = ['png','jpg','jpeg'];
-                $textArray = ['html','md'];
-
-                if (in_array("$ext",$imageArray))
+                //如果为图片，则放到images文件夹
+                $filename = uniqid().'.'.$ext;
+                $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
+                //图片上传成功
+                //如果是项目封面
+                if ($request->has('projectName'))
                 {
-                    //如果为图片，则放到images文件夹
-                    $filename = uniqid().'.'.$ext;
-                    $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
-                    //图片上传成功
-                    //如果是项目封面
-                    if ($request->has('projectName'))
-                    {
-                        File::create([
-                            'photo_name'=>$filename,
-                            'username_name'=>Cookie::get('username'),
-                            'prject_name'=>$request->get('projectName')
-                        ]);
-                    }
-                    else
-                    {
-                        File::create([
-                            'photo_name'=>$filename,
-                            'username_name'=>Cookie::get('username')
-                        ]);
-                    }
-                }
-                elseif (in_array("$ext",$textArray))
-                {
-                    //如果为文档，则放到text文件夹
-                    $filename = uniqid().'.'.$ext;
-                    $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
-
                     File::create([
                         'photo_name'=>$filename,
                         'username_name'=>Cookie::get('username'),
                         'prject_name'=>$request->get('projectName')
                     ]);
                 }
+                else
+                {
+                    File::create([
+                        'photo_name'=>$filename,
+                        'username_name'=>Cookie::get('username')
+                    ]);
+                }
             }
-            return redirect()->back();
+            elseif (in_array("$ext",$textArray))
+            {
+                //如果为文档，则放到text文件夹
+                $filename = uniqid().'.'.$ext;
+                $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
+
+                File::create([
+                    'photo_name'=>$filename,
+                    'username_name'=>Cookie::get('username'),
+                    'prject_name'=>$request->get('projectName')
+                ]);
+            }
         }
-        else
-        {
-            return view('upload');
-        }
+        return redirect()->back();
     }
+
+//    public function upload(Request $request)
+//    {
+//        if ($request->isMethod('POST'))
+//        {
+////            var_dump($_FILES);
+////            exit;
+//            $file = $request->file('file');
+//
+//            if ($file->isValid())
+//            {
+//                $ext = $file->getClientOriginalExtension();
+//                $type = $file->getClientMimeType();
+//                $realPath = $file->getRealPath();
+//                //echo $type;
+//                //exit;
+//                $imageArray = ['png','jpg','jpeg'];
+//                $textArray = ['html','md'];
+//
+//                if (in_array("$ext",$imageArray))
+//                {
+//                    //如果为图片，则放到images文件夹
+//                    $filename = uniqid().'.'.$ext;
+//                    $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
+//                    //图片上传成功
+//                    //如果是项目封面
+//                    if ($request->has('projectName'))
+//                    {
+//                        File::create([
+//                            'photo_name'=>$filename,
+//                            'username_name'=>Cookie::get('username'),
+//                            'prject_name'=>$request->get('projectName')
+//                        ]);
+//                    }
+//                    else
+//                    {
+//                        File::create([
+//                            'photo_name'=>$filename,
+//                            'username_name'=>Cookie::get('username')
+//                        ]);
+//                    }
+//                }
+//                elseif (in_array("$ext",$textArray))
+//                {
+//                    //如果为文档，则放到text文件夹
+//                    $filename = uniqid().'.'.$ext;
+//                    $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
+//
+//                    File::create([
+//                        'photo_name'=>$filename,
+//                        'username_name'=>Cookie::get('username'),
+//                        'prject_name'=>$request->get('projectName')
+//                    ]);
+//                }
+//            }
+//            return redirect()->back();
+//        }
+//        else
+//        {
+//            return view('upload');
+//        }
+//    }
 
 }

@@ -130,4 +130,16 @@ class HomeController extends Controller
     {
         return view('admin.projectCreate');
     }
+
+    //显示admin显示附件详情界面
+    public function showFileInfo()
+    {
+        return view('admin.fileInfo');
+    }
+
+    //显示admin上传附件界面
+    public function showFileUpload()
+    {
+        return view('admin.fileUpload');
+    }
 }
