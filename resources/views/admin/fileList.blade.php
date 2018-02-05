@@ -37,8 +37,8 @@
                                     <th width="80">ID</th>
                                     <th width="80">附件名称</th>
                                     <th>项目名称</th>
-                                    <th>创建时间</th>
-                                    <th>更新时间</th>
+                                    <th>文件大小</th>
+                                    <th>是否公开</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -48,13 +48,19 @@
                                         {{ csrf_field() }}
                                         <tr>
                                             <td> {{ $data->pid }} </td>
-                                            <td> {{ $data->photo_name }} </td>
+                                            <td> {{ $data->file_name }} </td>
                                             <td> {{ $data->project_name }} </td>
-                                            <td> {{ $data->created_at }} </td>
-                                            <td> {{ $data->updated_at }} </td>
+                                            <td> {{ $data->file_size }} </td>
+                                            <td>
+                                                @if($data->file_type == 0 )
+                                                    私有
+                                                @elseif($data->file_type == 1)
+                                                    公开
+                                                @endif
+                                            </td>
                                             <td>
                                                 <button  type="submit" class="btn btn-danger btn-sm">删除</button>
-                                                <a href="/detailed" class="btn btn-success btn-sm">详情</a>
+                                                <a href="fileId={{ $data->pid }}" class="btn btn-success btn-sm">详情</a>
                                             </td>
                                         </tr>
                                     </form>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
+use function Symfony\Component\HttpKernel\Tests\controller_func;
 
 /**
  * Class FileListController
@@ -20,6 +21,8 @@ class FileListController extends Controller
     public function adminDelete($id,Request $request)
     {
         $datas = File::find($id);
+        $filePath = $datas->local_path;
+
         $bool = $datas->delete();
         if ($bool)
         {
@@ -28,129 +31,135 @@ class FileListController extends Controller
         {
             $request->session()->flash('warning','修改失败！');
         }
+        File::deleted($filePath);
         return redirect()->back();
     }
 
     //显示附件详情
-    public function adminShow()
+    public function adminEdit($id,Request $request)
     {
-        echo 'adminShow';
+        //字段范围检测，不能有空字段，不在范围的字段
+        $this->validate($request,[
+            'description' => 'nullable|max:255',
+        ]);
+
+        $datas = File::find($id);
+        $datas->description = $request->get('description');
+        $datas->save();
+
+        $request->session()->flash('success','修改成功！');
+        return redirect()->back();
     }
+
 
     //admin上传附件
     public function adminUpload(Request $request)
     {
         $file = $request->file('file');
+        if ($file == null)
+        {
+            $request->session()->flash('warning','请选择附件！');
+            return redirect()->back();
+        }
+
+        $size = $file->getSize();
+        if ($size == null)
+        {
+            $request->session()->flash('warning','该文件为空文件！');
+            return redirect()->back();
+        }
+        for ($i=0;$size>1024;$i++)
+        {
+            $size = $size/1024;
+        }
+        if ($i>2)
+        {
+            $request->session()->flash('warning','文件太大！');
+            return redirect()->back();
+        }
+        switch ($i)
+        {
+            case 0:
+                $unit='B';
+                break;
+            case 1:
+                $unit='KB';
+                break;
+            case 2:
+                $unit='MB';
+                break;
+        }
+        $size = round($size,2);
+        $fileSize = $size.$unit;
 
         if ($file->isValid())
         {
+            $fileName = $file->getClientOriginalName();
             $ext = $file->getClientOriginalExtension();
-            $type = $file->getClientMimeType();
-            $realPath = $file->getRealPath();
-            //echo $type;
-            //exit;
             $imageArray = ['png','jpg','jpeg'];
-            $textArray = ['html','md'];
+            $textArray = ['html','docx'];
 
-            if (in_array("$ext",$imageArray))
+            $type = $request->get('type');
+            $fileType = 0;
+            if ($type == 'public')
             {
-                //如果为图片，则放到images文件夹
-                $filename = uniqid().'.'.$ext;
-                $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
-                //图片上传成功
-                //如果是项目封面
-                if ($request->has('projectName'))
+                $fileType = 1;
+                if (in_array("$ext",$imageArray))
                 {
-                    File::create([
-                        'photo_name'=>$filename,
-                        'username_name'=>Cookie::get('username'),
-                        'prject_name'=>$request->get('projectName')
-                    ]);
+                    //如果为图片，则放到images文件夹
+                    $filePath = $file->store('/public/images');
                 }
-                else
+                elseif (in_array("$ext",$textArray))
                 {
-                    File::create([
-                        'photo_name'=>$filename,
-                        'username_name'=>Cookie::get('username')
-                    ]);
+                    //如果为文档，则放到text文件夹
+                    $filePath = $file->store('/public/text');
+                }else
+                {
+                    $request->session()->flash('warning','文件格式不正确！');
+                    return redirect()->back();
+                }
+            }elseif ($type == 'private')
+            {
+                $fileType = 0;
+                if (in_array("$ext",$imageArray))
+                {
+                    $filePath = $file->store('/private/images');
+                }
+                elseif (in_array("$ext",$textArray))
+                {
+                    $filePath = $file->store('/private/text');
+                }else
+                {
+                    $request->session()->flash('warning','文件格式不正确！');
+                    return redirect()->back();
                 }
             }
-            elseif (in_array("$ext",$textArray))
-            {
-                //如果为文档，则放到text文件夹
-                $filename = uniqid().'.'.$ext;
-                $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
 
-                File::create([
-                    'photo_name'=>$filename,
-                    'username_name'=>Cookie::get('username'),
-                    'prject_name'=>$request->get('projectName')
-                ]);
+           $fileURL =  asset('storage/'.substr($filePath,7));
+
+            $datas = File::create([
+                'local_path' => $filePath,
+                'file_name' => $fileName,
+                'file_size' => $fileSize,
+                'file_type' => $fileType,
+                'username' => Cookie::get('username'),
+            ]);
+
+            if ($fileType == 1 )
+            {
+                $datas->file_url = $fileURL;
+                $datas->save();
             }
+
+            if ($request->has('projectName'))
+            {
+                $datas->prject_name = $request->get('projectName');
+                $datas->save();
+            }
+            $request->session()->flash('success','上传成功！');
         }
         return redirect()->back();
     }
 
-//    public function upload(Request $request)
-//    {
-//        if ($request->isMethod('POST'))
-//        {
-////            var_dump($_FILES);
-////            exit;
-//            $file = $request->file('file');
-//
-//            if ($file->isValid())
-//            {
-//                $ext = $file->getClientOriginalExtension();
-//                $type = $file->getClientMimeType();
-//                $realPath = $file->getRealPath();
-//                //echo $type;
-//                //exit;
-//                $imageArray = ['png','jpg','jpeg'];
-//                $textArray = ['html','md'];
-//
-//                if (in_array("$ext",$imageArray))
-//                {
-//                    //如果为图片，则放到images文件夹
-//                    $filename = uniqid().'.'.$ext;
-//                    $bool = Storage::disk('images')->put($filename,file_get_contents($realPath));
-//                    //图片上传成功
-//                    //如果是项目封面
-//                    if ($request->has('projectName'))
-//                    {
-//                        File::create([
-//                            'photo_name'=>$filename,
-//                            'username_name'=>Cookie::get('username'),
-//                            'prject_name'=>$request->get('projectName')
-//                        ]);
-//                    }
-//                    else
-//                    {
-//                        File::create([
-//                            'photo_name'=>$filename,
-//                            'username_name'=>Cookie::get('username')
-//                        ]);
-//                    }
-//                }
-//                elseif (in_array("$ext",$textArray))
-//                {
-//                    //如果为文档，则放到text文件夹
-//                    $filename = uniqid().'.'.$ext;
-//                    $bool = Storage::disk('texts')->put($filename,file_get_contents($realPath));
-//
-//                    File::create([
-//                        'photo_name'=>$filename,
-//                        'username_name'=>Cookie::get('username'),
-//                        'prject_name'=>$request->get('projectName')
-//                    ]);
-//                }
-//            }
-//            return redirect()->back();
-//        }
-//        else
-//        {
-//            return view('upload');
-//        }
-//    }
 
 }

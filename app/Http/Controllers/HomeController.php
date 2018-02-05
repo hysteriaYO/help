@@ -9,6 +9,7 @@ use App\model\User;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class HomeController
@@ -132,9 +133,10 @@ class HomeController extends Controller
     }
 
     //显示admin显示附件详情界面
-    public function showFileInfo()
+    public function showFileEdit($id)
     {
-        return view('admin.fileInfo');
+        $datas = File::find($id);
+        return view('admin.fileEdit',['datas'=>$datas]);
     }
 
     //显示admin上传附件界面

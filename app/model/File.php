@@ -21,7 +21,12 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'photo_name',
-        'project_name'
+        'username',
+        'file_url',
+        'local_path',
+        'file_name',
+        'project_name',
+        'file_size',
+        'file_type',
     ];
 }

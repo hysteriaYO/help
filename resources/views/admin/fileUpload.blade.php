@@ -27,9 +27,12 @@
                     </div>
                     <div class="box-body" style="padding-right: 200px;">
                         <div class="form-left">
-                            <form action="" method="POST">
+                            <form method="post" enctype="multipart/form-data" action="">
                                 {{ csrf_field() }}
+                                <p>上传文件支持格式类型：png、jpg、jpeg、html、docx</p>
                                 <label for="file">选择文件</label>
+                                <input type="radio" name="type" value="public" checked>公开
+                                <input type="radio" name="type" value="private">私有
                                 <input type="file" name="file">
                                 <button type="submit">上传</button>
                                 {{--提示框--}}

@@ -37,8 +37,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('dashboard', 'HomeController@showBoardForm')->name('dashboard');  //仪表盘
 
     Route::get('fileList', 'HomeController@showPhotoForm')->name('fileList');          //附件列表
-    Route::get('fileId={id}','HomeController@showFileInfo');                        //admin查看附件详情
-    Route::post('fileId={id}','admin\fileListController@adminShow');
+    Route::get('fileId={id}','HomeController@showFileEdit');                        //admin查看附件详情
+    Route::post('fileId={id}','admin\fileListController@adminEdit');
     Route::post('deleteFile={id}', 'admin\fileListController@adminDelete');             //admin删除附件
     Route::get('uploadFile','HomeController@showFileUpload');                       //admin上传附件
     Route::post('uploadFile','admin\fileListController@adminUpload');
