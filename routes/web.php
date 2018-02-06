@@ -11,7 +11,6 @@
 |
 */
 
-Route::any('upload','admin\FileController@upload');        //图片上传
 
 Route::group(['middleware' => ['web']], function () {
 
@@ -19,43 +18,43 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     //下拉菜单
-    Route::get('person', 'HomeController@showPersonSpace')->name('user.show');  //显示用户空间
-    Route::get('project', 'HomeController@showMyProject')->name('users.project');  //显示用户项目
-    Route::get('center', 'HomeController@showCenterForm')->name('center');   //后台管理
-    Route::get('home', 'users\UsersController@logout')->name('user.logOut'); //用户退出
+    Route::get('person', ['uses' => 'HomeController@showPersonSpace','https'])->name('user.show');  //显示用户空间
+    Route::get('project', ['uses' => 'HomeController@showMyProject','https'])->name('users.project');  //显示用户项目
+    Route::get('center',['uses' =>  'HomeController@showCenterForm','https'])->name('center');   //后台管理
+    Route::get('home', ['uses' => 'users\UsersController@logout','https'])->name('user.logOut'); //用户退出
 
     //用户
-    Route::get('login', 'HomeController@showLoginForm')->name('login');  //用户登录
-    Route::post('login', 'users\UsersController@login');
-    Route::get('create', 'HomeController@showCreateForm')->name('create'); //用户注册
-    Route::post('create', 'users\UsersController@create');
-    Route::get('updatePassword', 'HomeController@showUpdatePassword')->name('user.password');         //显示修改密码页
-    Route::post('person', 'users\UsersController@edit');         //编辑用户信息
-    Route::post('updatePassword', 'users\UsersController@update');          //修改密码
+    Route::get('login', ['uses' => 'HomeController@showLoginForm','https'])->name('login');  //用户登录
+    Route::post('login', ['uses' => 'users\UsersController@login','https']);
+    Route::get('create', ['uses' => 'HomeController@showCreateForm','https'])->name('create'); //用户注册
+    Route::post('create', ['uses' => 'users\UsersController@create','https']);
+    Route::get('updatePassword', ['uses' => 'HomeController@showUpdatePassword','https'])->name('user.password');         //显示修改密码页
+    Route::post('person', ['uses' => 'users\UsersController@edit','https']);         //编辑用户信息
+    Route::post('updatePassword', ['uses' => 'users\UsersController@update','https']);          //修改密码
 
     //admin后台管理
-    Route::get('dashboard', 'HomeController@showBoardForm')->name('dashboard');  //仪表盘
+    Route::get('dashboard', ['uses' => 'HomeController@showBoardForm','https'])->name('dashboard');  //仪表盘
 
-    Route::get('fileList', 'HomeController@showPhotoForm')->name('fileList');          //附件列表
-    Route::get('fileId={id}','HomeController@showFileEdit');                        //admin查看附件详情
-    Route::post('fileId={id}','admin\fileListController@adminEdit');
-    Route::post('deleteFile={id}', 'admin\fileListController@adminDelete');             //admin删除附件
-    Route::get('uploadFile','HomeController@showFileUpload');                       //admin上传附件
-    Route::post('uploadFile','admin\fileListController@adminUpload');
+    Route::get('fileList', ['uses' => 'HomeController@showPhotoForm','https'])->name('fileList');          //附件列表
+    Route::get('fileId={id}',['uses' => 'HomeController@showFileEdit','https']);                        //admin查看附件详情
+    Route::post('fileId={id}',['uses' => 'admin\fileListController@adminEdit','https']);
+    Route::post('deleteFile={id}', ['uses' => 'admin\fileListController@adminDelete','https']);             //admin删除附件
+    Route::get('uploadFile',['uses' => 'HomeController@showFileUpload','https']);                       //admin上传附件
+    Route::post('uploadFile',['uses' => 'admin\fileListController@adminUpload','https']);
 
-    Route::get('userList', 'HomeController@showUserList')->name('userList');     //用户列表
-    Route::get('userId={id}', 'HomeController@showUserEdit');                     //admin修改用户信息页面
-    Route::post('userId={id}', 'admin\UserListController@adminEdit');
-    Route::post('deleteUser={id}', 'admin\UserListController@adminDelete');
-    Route::get('createUser','HomeController@showUserCreate');                       //admin创建用户
-    Route::post('createUser','admin\UserListController@adminCreate');
+    Route::get('userList', ['uses' => 'HomeController@showUserList','https'])->name('userList');     //用户列表
+    Route::get('userId={id}', ['uses' => 'HomeController@showUserEdit','https']);                     //admin修改用户信息页面
+    Route::post('userId={id}', ['uses' => 'admin\UserListController@adminEdit','https']);
+    Route::post('deleteUser={id}', ['uses' => 'admin\UserListController@adminDelete','https']);
+    Route::get('createUser',['uses' => 'HomeController@showUserCreate','https']);                       //admin创建用户
+    Route::post('createUser',['uses' => 'admin\UserListController@adminCreate','https']);
 
-    Route::get('projectList', 'HomeController@showProjectList')->name('projectList');    //项目列表
-    Route::get('projectId={id}', 'HomeController@showProjectEdit');                     //admin修改项目信息页面
-    Route::post('projectId={id}', 'admin\ProjectListController@adminEdit');
-    Route::post('deleteProject={id}', 'admin\ProjectListController@adminDelete');       //admin删除项目
-    Route::get('createProject','HomeController@showProjectCreate');                     //admin创建项目
-    Route::post('createProject','admin\ProjectListController@adminCreate');
+    Route::get('projectList', ['uses' => 'HomeController@showProjectList','https'])->name('projectList');    //项目列表
+    Route::get('projectId={id}', ['uses' => 'HomeController@showProjectEdit','https']);                     //admin修改项目信息页面
+    Route::post('projectId={id}', ['uses' => 'admin\ProjectListController@adminEdit','https']);
+    Route::post('deleteProject={id}', ['uses' => 'admin\ProjectListController@adminDelete','https']);       //admin删除项目
+    Route::get('createProject',['uses' => 'HomeController@showProjectCreate','https']);                     //admin创建项目
+    Route::post('createProject',['uses' => 'admin\ProjectListController@adminCreate','https']);
 
 
 

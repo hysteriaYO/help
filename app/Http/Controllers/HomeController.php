@@ -40,6 +40,10 @@ class HomeController extends Controller
     //显示登录界面
     public function showLoginForm()
     {
+//        $url = $request->getUri();
+//        echo $url;
+//        exit;
+//        curl_setopt($request,CURLOPT_SSL_VERIFYPEER，FALSE);
         return view('users.login');
     }
 
@@ -121,7 +125,7 @@ class HomeController extends Controller
     }
 
     //显示admin创建用户界面
-    public function showUserCreate()
+    public function showUserCreate(Request $request)
     {
         return view('admin.userCreate');
     }
