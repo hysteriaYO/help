@@ -30,7 +30,8 @@
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-check"></span>
                         </div>
-                        <input class="form-control volidate-input validlogin " placeholder="请输入验证码" type="text">
+                        <input class="form-control volidate-input validlogin " placeholder="请输入验证码" type="text" name="vericode">
+                        <input type="hidden" value="" class="vericodes" name="vericode_confirmation">
                     </div>
                     <canvas id="canvas" class="canvas" width="140" height="50"></canvas>
                     <p class="errlogin errall"></p>

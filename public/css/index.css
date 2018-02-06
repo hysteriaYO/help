@@ -29,7 +29,7 @@
 }
 .prompt {
     position: absolute;
-    margin-left: auto;
+    margin-left: 20%;
     color: red;
     font-size: 8px;
 }

@@ -70,4 +70,38 @@ class UserListController extends Controller
         }
         return redirect()->back();
     }
+
+    //admin创建用户
+    public function adminCreate(Request $request)
+    {
+        //字段范围检测，不能有空字段，不在范围的字段
+        $this->validate($request,[
+            'username' => 'required|unique:users|min:6|max:40',
+            'password' => 'required|confirmed|min:6|max:40|alpha_num',
+            'email' => 'required|email|max:40',
+            'phone' => 'nullable|numeric|max:40',
+            'description' => 'nullable|max:255',
+        ]);
+
+        $datas = User::create([
+            'username' => $_POST['username'],
+            'password' => bcrypt($_POST['password']),
+            'email' => $_POST['email'],
+        ]);
+        if ($request->get('email'))
+        {
+            $datas->email = $request->get('email');
+        }
+        if ($request->get('phone'))
+        {
+            $datas->phone = $request->get('phone');
+        }
+        if ($request->get('description'))
+        {
+            $datas->description = $request->get('description');
+        }
+        $datas->save();
+        $request->session()->flash('success','创建成功！');
+        return redirect()->back();
+    }
 }

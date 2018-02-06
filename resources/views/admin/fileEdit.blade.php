@@ -22,7 +22,7 @@
                 <div class="page-right">
                     <div class="m-box">
                         <div class="box-head">
-                            <strong class="box-title">编辑项目</strong>
+                            <strong class="box-title">编辑附件</strong>
                         </div>
                     </div>
                     <div class="box-body" style="padding-right: 200px;">
@@ -30,24 +30,28 @@
                             <form action="" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>作者</label>
-                                    <input type="text" class="form-control disabled" value="{{ $datas->username }}" disabled>
+                                    <label>附件名</label>
+                                    <input type="text" class="form-control disabled" value="{{ $datas->file_name }}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>项目名<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="{{ $datas->project_name }}" name="projectName" max="100" placeholder="项目名称，必填" required>
+                                    <label>项目名</label>
+                                    <input type="text" class="form-control" value="{{ $datas->project_name }}" name="projectName" max="100" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>公司名称<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="{{ $datas->company_name }}" name="companyName" max="100" placeholder="公司名称，必填" required>
+                                    <label>文件路径<strong class="text-danger">*</strong></label>
+                                    <input type="text" class="form-control" value="{{ $datas->local_path }}" name="companyName" max="100" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>公司电话<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" name="companyPhone" value="{{ $datas->company_phone }}" placeholder="公司联系方式，必填" required>
+                                    <label>下载路径</label>
+                                    <input type="text" class="form-control" name="companyPhone" value="{{ $datas->file_url }}" placeholder="私有文件，不提供对外下载地址" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>邮箱<strong class="text-danger">*</strong></label>
-                                    <input type="email" class="form-control" value="{{ $datas->company_email }}"  name="companyEmail" max="100" placeholder="公司邮箱，必填" required>
+                                    <label>文件大小</label>
+                                    <input type="email" class="form-control" value="{{ $datas->file_size }}"  name="companyEmail" max="100" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>上传时间</label>
+                                    <input type="email" class="form-control" value="{{ $datas->created_at }}"  name="companyEmail" max="100" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="description">描述</label>

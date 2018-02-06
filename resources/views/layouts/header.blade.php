@@ -6,7 +6,7 @@
                 <div class="navbar-header col-sm-12 col-md-9 col-lg-8">
                     <a href="{{ Route('home') }}" class="navbar-brand" title="MinDoc文档管理系统">
 
-                        MinDoc文档管理系统
+                        文档管理系统
 
                     </a>
                     <nav class="collapse navbar-collapse col-sm-10">

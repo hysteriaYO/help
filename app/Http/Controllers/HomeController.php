@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\model\Doc;
-use App\model\Photo;
+use App\model\File;
 use App\model\Project;
 use App\model\User;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class HomeController
@@ -74,7 +75,7 @@ class HomeController extends Controller
         $userNum = User::count();
         $projectNum = Project::count();
         $docNum = Doc::count();
-        $photoNum = Photo::count();
+        $photoNum = File::count();
         $data=[];
         $data['userNum']=$userNum;
         $data['projectNum']=$projectNum;
@@ -87,22 +88,22 @@ class HomeController extends Controller
     //显示附件管理
     public function showPhotoForm()
     {
-        $datas = Photo::all();
-        return view('admin.photo',['datas'=>$datas]);
+        $datas = File::all();
+        return view('admin.fileList',['datas'=>$datas]);
     }
 
     //显示用户列表
     public function showUserList()
     {
         $datas = User::all();
-        return view('admin.userlist',['datas'=>$datas]);
+        return view('admin.userList',['datas'=>$datas]);
     }
 
     //显示项目列表
     public function showProjectList()
     {
         $datas = Project::all();
-        return view('admin.projectlist',['datas'=>$datas]);
+        return view('admin.projectList',['datas'=>$datas]);
     }
 
     //显示admin修改用户界面
@@ -117,5 +118,30 @@ class HomeController extends Controller
     {
         $datas = Project::find($id);
         return view('admin.projectEdit',['datas'=>$datas]);
+    }
+
+    //显示admin创建用户界面
+    public function showUserCreate()
+    {
+        return view('admin.userCreate');
+    }
+
+    //显示admin创建项目界面
+    public function showProjectCreate()
+    {
+        return view('admin.projectCreate');
+    }
+
+    //显示admin显示附件详情界面
+    public function showFileEdit($id)
+    {
+        $datas = File::find($id);
+        return view('admin.fileEdit',['datas'=>$datas]);
+    }
+
+    //显示admin上传附件界面
+    public function showFileUpload()
+    {
+        return view('admin.fileUpload');
     }
 }

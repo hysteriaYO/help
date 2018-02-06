@@ -94,9 +94,12 @@
 
 </style>
 
+
 @extends('layouts.basic')
 
-@include('layouts.header')
+@section('header')
+    @include('layouts.header')
+@endsection
 
 @section('content')
     <div class="container content-project">

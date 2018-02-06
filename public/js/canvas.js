@@ -6,8 +6,13 @@ var valiarr = "";
 canvas === null ? "" : toclick(canvas);
 canvasr === null ? "" : toclick(canvasr);
 var can = canvas === null ? canvasr : canvas;
-validate(can);
+var vericodesDom = getdom("vericodes");
 
+function getdom(res) {
+    return document.getElementsByClassName(res)[0];
+}
+
+validate(can);
 function validate(can) {
     valiarr = "";
     var context = can.getContext("2d");
@@ -30,6 +35,9 @@ function validate(can) {
     context.font="40px Arial";
     context.fillText(valiarr,20,40);
     valiarr = valiarr.toLowerCase();
+    if(vericodesDom){
+        vericodesDom.value = valiarr;
+    }
 }
 
 function random() {
@@ -45,9 +53,7 @@ function toclick(dom) {
 
 // 注册验证
 
-function getdom(res) {
-    return document.getElementsByClassName(res)[0];
-}
+
 var btnr = getdom("btn-r");
 var allS = document.getElementsByClassName("all");
 var all = Array.prototype.slice.call(allS);
@@ -131,6 +137,7 @@ all.forEach(function (e, i) {
         }
     },false)
 });
+//注册按钮
 if(btnr){
     btnr.addEventListener("click",function (e) {
         var fg = true;
@@ -145,6 +152,7 @@ if(btnr){
     },false)
 }
 
+
 // 登录验证马
 var errlogin = getdom("errlogin");
 var validlogin = getdom("validlogin");
@@ -157,7 +165,23 @@ validlogin.addEventListener("blur",function (e) {
     }
 },false)
 
+/*登录按钮*/
 
+// var loginbtnDom = getdom("loginbtn");
+// //
+// loginbtnDom.addEventListener("click",(ev)=>{
+//     console.log(getdom("validlogin").value);
+//     console.log(getdom("vericodes").value);
+
+//     var uname = getdom("suname").value;
+//     var pwd = getdom("spwd").value;
+//     var xml = new XMLHttpRequest();
+//     var formdata = new FormData();
+//     formdata.append("username",uname);
+//     formdata.append("password",pwd);
+//     xml.open("POST","",true);
+//     xml.send(formdata);
+// },false)
 
 
 
