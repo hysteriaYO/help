@@ -56,8 +56,9 @@
                                             {{--<td><span class="label label-danger">禁用</span></td>--}}
                                             <td>
                                                 <a href="userId={{ $data->uid }}" class="btn btn-sm btn-default">编辑</a>
-                                                {{--<button type="button" class="btn btn-success btn-sm">禁用</button>--}}
+                                                @if( $data->username != 'admin' )
                                                 <button type="submit" id="{{ $data->uid }}" name="{{ $data->uid }}" class="btn btn-danger btn-sm">删除</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     </form>

@@ -59,6 +59,10 @@
                                     <button type="submit" class="btn btn-success" >保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
+
+                                {{--提示框--}}
+                                @include('layouts.message')
+
                             </form>
                         </div>
                     </div>

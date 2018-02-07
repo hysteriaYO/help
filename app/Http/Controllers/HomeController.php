@@ -7,7 +7,7 @@ use App\model\File;
 use App\model\Project;
 use App\model\User;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-
     //显示主页
     public function index()
     {
@@ -29,7 +28,8 @@ class HomeController extends Controller
             //如果已经存在username
             //$var = Cookie::get('username');
             return view('home', ['projects' => $projects]);
-        } else {
+        }
+        else {
             //设置游客身份
             Cookie::queue('username', 'guest');
             //$var = Cookie::get('username');
@@ -38,7 +38,7 @@ class HomeController extends Controller
     }
 
     //显示登录界面
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
         return view('users.login');
     }
@@ -47,6 +47,12 @@ class HomeController extends Controller
     public function showCreateForm()
     {
         return view('users.create');
+    }
+
+    //显示忘记密码界面
+    public function showForgetForm()
+    {
+        return view('users.forget');
     }
 
     //显示个人中心
@@ -58,11 +64,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -80,11 +84,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -101,11 +103,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -123,11 +123,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -154,11 +152,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -176,11 +172,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -198,11 +192,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -220,11 +212,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -242,11 +232,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -265,11 +253,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -286,11 +272,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -307,11 +291,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }
@@ -329,11 +311,9 @@ class HomeController extends Controller
             if (Cookie::get('username') == 'guest')
             {
                 return redirect()->route('login');
-            }else
-            {
-
             }
-        }else
+        }
+        else
         {
             return redirect()->route('login');
         }

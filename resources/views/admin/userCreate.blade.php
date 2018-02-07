@@ -59,15 +59,7 @@
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
                                 {{--提示框--}}
-                                @foreach (['success','warning'] as $msg)
-                                    @if(session()->has($msg))
-                                        <div class="flash-message">
-                                            <p class="alert alert-{{ $msg }}">
-                                                {{ session()->get($msg) }}
-                                            </p>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                @include('layouts.message')
 
                                 {{--出错提示框--}}
                                 <p class="prompt">

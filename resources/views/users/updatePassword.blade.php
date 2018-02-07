@@ -54,16 +54,10 @@
                                     <button type="submit" class="btn btn-success" data-loading-text="保存中...">保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
+
                                 {{--提示框--}}
-                                @foreach (['success','warning'] as $msg)
-                                    @if(session()->has($msg))
-                                        <div class="flash-message">
-                                            <p class="alert alert-{{ $msg }}">
-                                                {{ session()->get($msg) }}
-                                            </p>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                @include('layouts.message')
+
                             </form>
                         </div>
                     </div>
