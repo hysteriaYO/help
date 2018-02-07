@@ -40,10 +40,6 @@ class HomeController extends Controller
     //显示登录界面
     public function showLoginForm()
     {
-//        $url = $request->getUri();
-//        echo $url;
-//        exit;
-//        curl_setopt($request,CURLOPT_SSL_VERIFYPEER，FALSE);
         return view('users.login');
     }
 
@@ -56,6 +52,21 @@ class HomeController extends Controller
     //显示个人中心
     public function showPersonSpace()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = User::all()->where('username',Cookie::get('username'))->first();
         return view('users.person',['datas'=>$datas]);
     }
@@ -63,12 +74,42 @@ class HomeController extends Controller
     //显示修改密码界面
     public function showUpdatePassword()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         return view('users.updatePassword');
     }
 
     //显示我的项目
     public function showMyProject()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $projects = Project::all()->where('username',Cookie::get('username'));
         return view('users.myProject',['projects'=>$projects]);
     }
@@ -76,6 +117,21 @@ class HomeController extends Controller
     //显示仪表盘
     public function showBoardForm()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $userNum = User::count();
         $projectNum = Project::count();
         $docNum = Doc::count();
@@ -92,6 +148,21 @@ class HomeController extends Controller
     //显示附件管理
     public function showPhotoForm()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = File::all();
         return view('admin.fileList',['datas'=>$datas]);
     }
@@ -99,6 +170,21 @@ class HomeController extends Controller
     //显示用户列表
     public function showUserList()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = User::all();
         return view('admin.userList',['datas'=>$datas]);
     }
@@ -106,6 +192,21 @@ class HomeController extends Controller
     //显示项目列表
     public function showProjectList()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = Project::all();
         return view('admin.projectList',['datas'=>$datas]);
     }
@@ -113,6 +214,21 @@ class HomeController extends Controller
     //显示admin修改用户界面
     public function showUserEdit($id)
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = User::find($id);
         return view('admin.userEdit',['datas'=>$datas]);
     }
@@ -120,6 +236,22 @@ class HomeController extends Controller
     //显示admin修改项目界面
     public function showProjectEdit($id)
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
+
         $datas = Project::find($id);
         return view('admin.projectEdit',['datas'=>$datas]);
     }
@@ -127,18 +259,63 @@ class HomeController extends Controller
     //显示admin创建用户界面
     public function showUserCreate(Request $request)
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         return view('admin.userCreate');
     }
 
     //显示admin创建项目界面
     public function showProjectCreate()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         return view('admin.projectCreate');
     }
 
     //显示admin显示附件详情界面
     public function showFileEdit($id)
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         $datas = File::find($id);
         return view('admin.fileEdit',['datas'=>$datas]);
     }
@@ -146,6 +323,21 @@ class HomeController extends Controller
     //显示admin上传附件界面
     public function showFileUpload()
     {
+        //阻止非登录用户操作
+        if (Cookie::has('username'))
+        {
+            if (Cookie::get('username') == 'guest')
+            {
+                return redirect()->route('login');
+            }else
+            {
+
+            }
+        }else
+        {
+            return redirect()->route('login');
+        }
+
         return view('admin.fileUpload');
     }
 }
