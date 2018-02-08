@@ -107,12 +107,12 @@ class FileListController extends Controller
                 if (in_array("$ext",$imageArray))
                 {
                     //如果为图片，则放到images文件夹
-                    $filePath = $file->store('/public/images');
+                    $filePath = $file->store('/public/public/images');
                 }
                 elseif (in_array("$ext",$textArray))
                 {
                     //如果为文档，则放到text文件夹
-                    $filePath = $file->store('/public/text');
+                    $filePath = $file->store('/public/public/text');
                 }
                 else
                 {
@@ -125,11 +125,11 @@ class FileListController extends Controller
                 $fileType = 0;
                 if (in_array("$ext",$imageArray))
                 {
-                    $filePath = $file->store('/private/images');
+                    $filePath = $file->store('/public/private/images');
                 }
                 elseif (in_array("$ext",$textArray))
                 {
-                    $filePath = $file->store('/private/text');
+                    $filePath = $file->store('/public/private/text');
                 }
                 else
                 {
@@ -150,9 +150,12 @@ class FileListController extends Controller
 
             if ($fileType == 1 )
             {
-                $datas->file_url = $fileURL;
-                $datas->save();
+                //项目public，使用http协议
+                $fileURL = 'http'.substr($fileURL,5);
             }
+
+            $datas->file_url = $fileURL;
+            $datas->save();
 
             if ($request->has('projectName'))
             {

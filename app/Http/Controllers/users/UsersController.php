@@ -23,11 +23,13 @@ class UsersController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $credentials = $this->validate($request,[
-            'username' => 'required|max:40',
-            'password' => 'required',
+            'username' => 'required|min:2|max:40',
+            'password' => "required|min:6|max:40|alpha_num",
             'vericode' => 'required|confirmed'
         ]);
 
+        echo $request->get('password');
+        exit;
         //用户名、密码匹配
         $loginUser = User::where('username',$request->get('username'))->first();
         if ($loginUser == null)
@@ -66,7 +68,7 @@ class UsersController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $this->validate($request,[
-            'username' => 'required|unique:users|max:40',
+            'username' => 'required|unique:users|min:2|max:40',
             'password' => 'required|confirmed|min:6|max:40|alpha_num',
             'email' => 'required|email|max:40'
         ]);
@@ -87,7 +89,7 @@ class UsersController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $this->validate($request,[
-            'username' => 'required|max:40',
+            'username' => 'required|min:2|max:40',
             'password' => 'required|confirmed|min:6|max:40|alpha_num',
             'email' => 'required|email|max:40'
         ]);
@@ -113,6 +115,7 @@ class UsersController extends Controller
             return redirect()->back();
         }
     }
+
     //编辑用户信息
     public function edit(Request $request)
     {
@@ -159,13 +162,13 @@ class UsersController extends Controller
         return view('users.person',['datas'=>$datas]);
     }
 
-    //用户更新密码
+    //用户修改密码
     public function update(Request $request)
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $credentials = $this->validate($request,[
-            'oldpassword' => 'required|min:6|max:40',
-            'password' => 'required|confirmed|min:6|max:40'
+            'oldpassword' => 'required|min:6|max:40|alpha_num',
+            'password' => 'required|confirmed|min:6|max:40|alpha_num'
         ]);
 
         //旧密码不可以与新密码相同

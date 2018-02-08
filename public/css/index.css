@@ -61,6 +61,10 @@ header a{
     min-width: 120px;
 }
 @media (max-width: 600px) {
+   .box-head > a > span.glyphicon {
+        margin-right: 0;
+        margin-left: 0;
+    }
     header a{
         font-size: 10px;
     }

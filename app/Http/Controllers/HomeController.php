@@ -24,11 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $projects = Project::offset(0)->paginate(10);
-        if (Cookie::has('username')) {
-            //如果已经存在username
-            //$var = Cookie::get('username');
-            return view('home', ['projects' => $projects]);
-        }
+        return view('home', ['projects' => $projects]);
     }
 
     //显示登录界面

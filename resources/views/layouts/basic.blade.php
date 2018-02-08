@@ -76,12 +76,6 @@
         @show
 </div>
 
-{{--login register 的footer--}}
-{{--<div class="log-footer">--}}
-    {{--@section('log-footer')--}}
-
-    {{--@show--}}
-{{--</div>--}}
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

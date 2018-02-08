@@ -37,10 +37,10 @@
                                     <label>项目名</label>
                                     <input type="text" class="form-control" value="{{ $datas->project_name }}" name="projectName" max="100" disabled>
                                 </div>
-                                <div class="form-group">
-                                    <label>文件路径<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="{{ $datas->local_path }}" name="companyName" max="100" disabled>
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label>文件路径<strong class="text-danger">*</strong></label>--}}
+                                    {{--<input type="text" class="form-control" value="{{ $datas->local_path }}" name="companyName" max="100" disabled>--}}
+                                {{--</div>--}}
                                 <div class="form-group">
                                     <label>下载路径</label>
                                     <input type="text" class="form-control" name="companyPhone" value="{{ $datas->file_url }}" placeholder="私有文件，不提供对外下载地址" disabled>
