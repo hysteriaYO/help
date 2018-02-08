@@ -29,12 +29,6 @@ class HomeController extends Controller
             //$var = Cookie::get('username');
             return view('home', ['projects' => $projects]);
         }
-        else {
-            //设置游客身份
-            Cookie::queue('username', 'guest');
-            //$var = Cookie::get('username');
-            return view('home', ['projects' => $projects]);
-        }
     }
 
     //显示登录界面

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\users;
 
 use App\model\User;
-use App\model\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -46,8 +44,9 @@ class UsersController extends Controller
                 $loginUser->remember_token = $request->get('_token');
                 $loginUser->save();
             }
-            Cookie::queue('username',$request->get('username'));
-            return redirect()->route('home');
+//            Cookie::queue('username',$request->get('username'));
+            return redirect()->route('home')->cookie('username',"$loginUser->username");     //cookie有效一周,604800
+
         }
         else
         {
@@ -57,10 +56,9 @@ class UsersController extends Controller
     }
 
     //用户退出
-    public function logout()
+    public function logout(Request $request)
     {
-        Cookie::queue('username','guest');
-        return redirect()->route('login');
+        return redirect()->route('login')->cookie('username','guest',-1);
     }
 
     //用户注册

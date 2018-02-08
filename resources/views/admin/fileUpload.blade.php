@@ -39,14 +39,6 @@
                                 {{--提示框--}}
                                 @include('layouts.message')
 
-                                {{--出错提示框--}}
-                                <p class="prompt">
-                                    @if (count($errors) > 0)
-                                        @foreach ($errors->all() as $message)
-                                            <span>{{ $message }}</span>
-                                        @endforeach
-                                    @endif
-                                </p>
                             </form>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 <div class="page-left">
     <ul class="menu">
         <li class="active">
-            <a href="{{ route('dashboard') }}" class="item"><span class="glyphicon glyphicon-adjust" aria-hidden="true"></span> 仪表盘</a>
+            <a href="{{ route('dashboard') }}" class="item"><span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>仪表盘</a>
         </li>
         <li>
             <a href="{{ route('userList') }}" class="item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户管理</a>

@@ -80,7 +80,8 @@ header a{
         margin-left: 5px;
     }
     .nav-search input {
-        width: 80px;
+        width: 120px;
+        height: 30px;
     }
     .nav-login .nav-login-lo li {
         line-height: 40px;
@@ -94,6 +95,21 @@ header a{
     }
 }
 /*导航style end*/
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+    color: #dfdfdf;
+}
+input::-moz-placeholder,textarea:-moz-placeholder {
+    color: #dfdfdf;
+}
+input::-moz-placeholder,textarea::-moz-placeholder {
+    color: #dfdfdf;
+}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder {
+    color: #dfdfdf;
+}
+input:focus,textarea:focus {
+    outline: none;
+}
 /*登录页 style start */
 .login {
     position: relative;
