@@ -27,5 +27,9 @@ class Project extends Model
         'company_phone',
         'company_email',
         'description',
+        'project_description',
+        'sign',
+        'copyright',
+
     ];
 }

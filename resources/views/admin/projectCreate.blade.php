@@ -31,11 +31,11 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>作者<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="" name="username" placeholder="作者，必填" required>
+                                    <input type="text" class="form-control" disabled value="{{ Cookie::get('username') }}" name="username" placeholder="作者，必填" required>
                                 </div>
                                 <div class="form-group">
                                     <label>项目名<strong class="text-danger">*</strong></label>
-                                    <input type="text" class="form-control" value="" name="projectName" max="100" placeholder="项目名称，必填" required>
+                                    <input type="text" class="form-control" value="" name="project_name" max="100" placeholder="项目名称，必填" required>
                                 </div>
                                 <div class="form-group">
                                     <label>公司名称<strong class="text-danger">*</strong></label>
@@ -49,34 +49,33 @@
                                     <label>邮箱<strong class="text-danger">*</strong></label>
                                     <input type="email" class="form-control" value=""  name="companyEmail" max="100" placeholder="公司邮箱，必填" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="description">描述</label>
                                     <textarea class="form-control" rows="3" title="描述" name="description" id="description" maxlength="500"></textarea>
                                     <p style="color: #999;font-size: 12px;">描述不能超过500字</p>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label>
+                                            <input type="radio"  name="sign" value="0" checked=""> 公开<span class="text">(任何人都可以访问)</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>
+                                            <input type="radio"  name="sign" value="1"> 私有<span class="text">(只要参与者或使用令牌才能访问)</span>
+                                        </label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-success" >保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>
-                                {{--提示框--}}
-                                @foreach (['success','warning'] as $msg)
-                                    @if(session()->has($msg))
-                                        <div class="flash-message">
-                                            <p class="alert alert-{{ $msg }}">
-                                                {{ session()->get($msg) }}
-                                            </p>
-                                        </div>
-                                    @endif
-                                @endforeach
 
-                                {{--出错提示框--}}
-                                <p class="prompt">
-                                    @if (count($errors) > 0)
-                                        @foreach ($errors->all() as $message)
-                                            <span>{{ $message }}</span>
-                                        @endforeach
-                                    @endif
-                                </p>
+                                {{--提示框--}}
+                                @include('layouts.message')
+
                             </form>
                         </div>
                     </div>

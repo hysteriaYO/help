@@ -1,36 +1,146 @@
 /*导航style start*/
-.navbar {
-    margin-bottom: 0;
-    background-color: #fff;
-    border-bottom: 0;
-    box-shadow: rgba(0,0,0,.1)0 1px 5px;
-    /*border-top: 3px solid #009a61;*/
+*{
+    margin:0;
+    padding:0;
 }
-.navbar-header{
+li {
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+header {
+    height: 50px;
+}
+.navbar-static-top{
+    box-shadow: 0 1px 5px;
+    background: #f9f9f6;
+}
+.nav-system {
+    color: #2a2a2a;
+    font-weight: 500;
+    font-size: 20px;
     float: left;
     line-height: 50px;
 }
-.navbar-header a{
-    font-size: 14px;
-    font-weight: 500;
+.nav-list-c {
+    float: left;
+}
+.nav-ul {
+    float: left;
+}
+.nav-ul li {
+    float: left;
+    line-height: 50px;
+    list-style: none;
+    margin-left: 20px;
+}
+header a{
     color: #2a2a2a;
+    font-size: 16px;
+}
+.nav-login {
+    float: right;
+}
+.nav-search {
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.nav-search input {
+    width: 230px;
+}
+.nav-login .nav-login-lo li {
+   line-height: 50px;
+}
+.glyphicon {
+    margin-right: 10%;
+    margin-left: -10%;
+}
+.dropdown-menu {
+    min-width: 120px;
+}
+@media (max-width: 600px) {
+   .box-head > a > span.glyphicon {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    header a{
+        font-size: 10px;
+    }
+    .nav-system {
+        font-size: 14px;
+        line-height: 40px;
+    }
+    .nav-ul li {
+        line-height: 40px;
+        margin-left: 5px;
+    }
+    header {
+        height: 40px;
+    }
+    .nav-search {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    .nav-search input {
+        width: 120px;
+        height: 30px;
+    }
+    .nav-login .nav-login-lo li {
+        line-height: 40px;
+    }
+    ul.dropdown-menu {
+        min-width: 80px;
+        left: -20px;
+    }
+    .dropdown-menu li a {
+        font-size: 10px;
+    }
 }
 /*导航style end*/
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+    color: #dfdfdf;
+}
+input::-moz-placeholder,textarea:-moz-placeholder {
+    color: #dfdfdf;
+}
+input::-moz-placeholder,textarea::-moz-placeholder {
+    color: #dfdfdf;
+}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder {
+    color: #dfdfdf;
+}
+input:focus,textarea:focus {
+    outline: none;
+}
 /*登录页 style start */
 .login {
     position: relative;
-    width: 60%;
+    top: 150px;
+    width: 45%;
     border: 1px #aaa solid;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     border-radius: 5%;
     margin: 6% auto;
-    padding: 5%;
+    padding: 3%;
     background-color: #f1f1f1;
+}
+@media (max-width: 600px) {
+    .login {
+        width: 90%;
+        padding: 3%;
+        top: 100px;
+    }
 }
 .prompt {
     position: absolute;
+    bottom: -5px;
     margin-left: 20%;
-    color: red;
+    color: rgba(255,0,0,.6);
     font-size: 8px;
 }
 .login form {
@@ -47,9 +157,6 @@
 }
 .login .input-group {
     border-radius: 4px;
-}
-.login .input-group input.volidate-input {
-    width: 50%;
 }
 .volidate {
     position: relative;
@@ -76,9 +183,6 @@
     position: absolute;
     right: 0;
 }
-
-
-
 .manual-body {
     margin-top: 53px;
 }
@@ -92,38 +196,55 @@ a{
     top: 50px;
     bottom: 0;
     z-index: 100;
-    width: 199px;
+    width: 180px;
     background-color: #f5f5f5;
     border-right: 1px solid #eaeaea;
+    padding: 1% 0;
 }
-.manual-body .page-left .menu {
-    padding: 18px 0;
-}
-.manual-body .page-left .menu li {
-    height: 36px;
-    line-height: 0;
+@media (max-width: 600px){
+    .manual-body .page-left{
+        position: fixed;
+        left:0;
+        top: 40px;
+        width:100%;
+        height: 30px;
+        line-height: 45px;
+        overflow: hidden;
+        padding: 1%;
+    }
+    .manual-body .page-left li {
+        float: left;
+        font-size: 10px;
+    }
+    .manual-body .page-left .menu .item {
+        padding: 1px 15px;
+        line-height: 30px;
+    }
+    .manual-body .page-right {
+        margin-left: 4% !important;
+        min-width: 500px;
+    }
+    .m-box .box-head .box-title {
+        border-bottom: 0px solid #ddddd9;
+    }
 }
 .manual-body .page-left .menu .item {
     display: block;
-    padding: 8px 24px;
     color: #666;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: 20px;
+    line-height: 30px;
     text-decoration: none;
-}
-.manual-body .page-left .menu li.active .item {
-    background-color: #DDB;
+    text-align: center;
 }
 /*left end*/
-
 /*个人中心 start*/
 .manual-body .page-right {
-    padding: 15px 0 15px 24px;
-    margin-left: 200px;
-    min-width: 400px;
+    margin-left: 190px;
+    min-width: 500px;
+    margin-top: 6px;
 }
 .manual-body .page-right .box-head {
     border-bottom: 1px solid #DDDDD9;
@@ -135,7 +256,7 @@ a{
     padding-bottom: 3px;
     border-bottom: 2px solid #44B035;
     margin-bottom: -1px;
-    min-width: 80px;
+    /*min-width: 80px;*/
     font-weight: 200;
     font-size: 18px;
 }
@@ -184,9 +305,6 @@ a{
     word-wrap: break-word;
 }
 /*用户管理*/
-.pull-right {
-    float: right!important;
-}
 .btn-group-sm>.btn, .btn-sm {
     padding: 5px 10px;
     font-size: 12px;
@@ -194,9 +312,7 @@ a{
     border-radius: 3px;
 }
 .btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
+    color: #333;
 }
 /*项目管理 start*/
 .text {
@@ -211,3 +327,29 @@ a{
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+@media (max-width: 600px){
+    .page-right .m-box {
+        margin-top: 18px;
+    }
+    .page-right .m-box .box-head {
+        border-top: 1px solid #ddddd9;
+        position: relative;
+    }
+    .page-right .m-box .box-head .box-title {
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .page-right .box-head a.btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 0;
+    }
+    .box-body table tr th,td {
+        width: 30px;
+        font-size: 10px;
+        padding: 0 8px;
+    }
+}
+

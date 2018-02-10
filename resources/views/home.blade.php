@@ -34,11 +34,13 @@
 {{--@extends('base')--}}
 @extends('layouts.basic')
 
-@include('layouts.header')
+@section('header')
+    @include('layouts.header')
+@endsection
 
 
 @section('content')
-    <div class="content">
+
     <div class="home-box">
         <div class="container home-content">
             @foreach($projects as $project)
@@ -47,7 +49,12 @@
                         <a href="myDoc?project_name={{$project->project_name}}"><img src="" alt="封面"></a>
                     </div>
                     <div class="title">
-                        标题：{{$project->project_name}}
+                        @if($project -> sign)
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        @else
+                            <i aria-hidden="true" class="fa fa-unlock"></i>
+                        @endif
+                        {{$project->project_name}}
                     </div>
                     <div class="author">
                         作者：{{$project->username}}
@@ -57,7 +64,7 @@
 
         </div>
         <div class="container btn-list">
-            {{$projects->links()}}
+            {{$projects}}
         </div>
     </div>
 
@@ -65,22 +72,23 @@
 @endsection
 
 
+
 @section('footer')
     @parent
-    {{--获取项目和搜索--}}
+    <script src="js/jquery.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('.keyword').on('keypress', function (e) {
                 if (e.keyCode == 13) {
                     $keyword = $('.keyword').val();
-//                    $num = 10 ;
-                    // alert($keyword);
+                    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                     $.ajax({
-                        url: 'homeSearch',
-                        type: 'get',
+                        url: 'homeSearch?pag',
+                        type: 'post',
                         data: {'keyword': $keyword},
                         success: function (data) {
-//                            console.log(data);
+                           // console.log(data);
                             $html = '';
                             $('.btn-list').html($html);
                             $('.home-content').html($html);
@@ -100,6 +108,11 @@
                                 `
                             });
                             if($html != ''){
+                                $html+=`
+                                    <div class="container btn-list">
+                                        {{$projects}}
+                                    </div>
+                                    `
                                 $('.home-content').html($html);
                             }
                             else{

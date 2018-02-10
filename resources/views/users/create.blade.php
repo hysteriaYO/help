@@ -12,11 +12,6 @@
             <form action="" method="POST">
             {{ csrf_field() }}
             <h3 class="system">用户注册</h3>
-                @if (count($errors) > 0)
-                    @foreach ($errors->all() as $message)
-                        <li>{{ $message }}</li>
-                    @endforeach
-                @endif
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">
@@ -69,6 +64,10 @@
             <div class="form-group">
                 已有账号?<a href="login" title="立即注册">立即登录</a>
             </div>
+
+                {{--提示框--}}
+                @include('layouts.message')
+
         </form>
         </div>
     </div>

@@ -52,9 +52,9 @@
                                             <td> {{ $data->project_name }} </td>
                                             <td> {{ $data->file_size }} </td>
                                             <td>
-                                                @if($data->file_type == 0 )
+                                                @if($data->file_type == 1 )
                                                     私有
-                                                @elseif($data->file_type == 1)
+                                                @elseif($data->file_type == 0)
                                                     公开
                                                 @endif
                                             </td>

@@ -41,7 +41,7 @@
                         <input type="checkbox" name="remember">
                         记住我
                     </label>
-                    <a class="forget-pwd" href="">忘记密码?</a>
+                    <a class="forget-pwd" href="{{ Route('forget') }}">忘记密码?</a>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="form-control btn">登录</button>
@@ -49,26 +49,15 @@
                 <div class="form-group">
                     还没有账号?<a href="{{ route('create') }}" title="立即注册">立即注册</a>
                 </div>
-            </form>
-            {{--成功提示框--}}
-            @foreach (['success'] as $msg)
-                @if(session()->has($msg))
-                    <div class="flash-message">
-                        <p class="alert alert-{{ $msg }}">
-                            {{ session()->get($msg) }}
-                        </p>
-                    </div>
-                @endif
-            @endforeach
 
-            {{--出错提示框--}}
-            <p class="prompt">
-                @if (count($errors) > 0)
-                    @foreach ($errors->all() as $message)
-                        <span>{{ $message }}</span>
-                    @endforeach
-                @endif
-            </p>
+                {{--提示框--}}
+                @include('layouts.message')
+
+            </form>
+
+
+
+
         </div>
     </div>
     </div>

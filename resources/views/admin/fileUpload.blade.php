@@ -35,25 +35,10 @@
                                 <input type="radio" name="type" value="private">私有
                                 <input type="file" name="file">
                                 <button type="submit">上传</button>
-                                {{--提示框--}}
-                                @foreach (['success','warning'] as $msg)
-                                    @if(session()->has($msg))
-                                        <div class="flash-message">
-                                            <p class="alert alert-{{ $msg }}">
-                                                {{ session()->get($msg) }}
-                                            </p>
-                                        </div>
-                                    @endif
-                                @endforeach
 
-                                {{--出错提示框--}}
-                                <p class="prompt">
-                                    @if (count($errors) > 0)
-                                        @foreach ($errors->all() as $message)
-                                            <span>{{ $message }}</span>
-                                        @endforeach
-                                    @endif
-                                </p>
+                                {{--提示框--}}
+                                @include('layouts.message')
+
                             </form>
                         </div>
                     </div>

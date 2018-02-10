@@ -13,7 +13,7 @@ use function Symfony\Component\HttpKernel\Tests\controller_func;
  * Class FileListController
  * @package App\Http\Controllers\admin
  * 郭俊秀
- * PhotoController用来进行对附件的相关操作，操作：上传、查看、删除
+ * FileListController用来进行对附件的相关操作，操作：上传、修改、删除
  */
 class FileListController extends Controller
 {
@@ -24,12 +24,14 @@ class FileListController extends Controller
         $filePath = $datas->local_path;
 
         $bool = $datas->delete();
+        Storage::delete($filePath);
         if ($bool)
         {
-            $request->session()->flash('success','修改成功！');
-        }else
+            $request->session()->flash('success','删除成功！');
+        }
+        else
         {
-            $request->session()->flash('warning','修改失败！');
+            $request->session()->flash('warning','删除失败！');
         }
         File::deleted($filePath);
         return redirect()->back();
@@ -38,7 +40,7 @@ class FileListController extends Controller
     //显示附件详情
     public function adminEdit($id,Request $request)
     {
-        //字段范围检测，不能有空字段，不在范围的字段
+        //字段范围检测，不能有不在范围的字段
         $this->validate($request,[
             'description' => 'nullable|max:255',
         ]);
@@ -65,19 +67,14 @@ class FileListController extends Controller
         $size = $file->getSize();
         if ($size == null)
         {
-            $request->session()->flash('warning','该文件为空文件！');
+            $request->session()->flash('warning','该文件为空文件,请重新选择！');
             return redirect()->back();
         }
-        for ($i=0;$size>1024;$i++)
+        for ($sizeLength=0;$size>1024;$sizeLength++)
         {
             $size = $size/1024;
         }
-        if ($i>2)
-        {
-            $request->session()->flash('warning','文件太大！');
-            return redirect()->back();
-        }
-        switch ($i)
+        switch ($sizeLength)
         {
             case 0:
                 $unit='B';
@@ -88,8 +85,11 @@ class FileListController extends Controller
             case 2:
                 $unit='MB';
                 break;
+            default:
+                $request->session()->flash('warning','文件太大！');
+                return redirect()->back();
         }
-        $size = round($size,2);
+        $size = round($size,2);     //保留两位小数点
         $fileSize = $size.$unit;
 
         if ($file->isValid())
@@ -100,35 +100,38 @@ class FileListController extends Controller
             $textArray = ['html','docx'];
 
             $type = $request->get('type');
-            $fileType = 0;
+            $fileType = 1;
             if ($type == 'public')
-            {
-                $fileType = 1;
-                if (in_array("$ext",$imageArray))
-                {
-                    //如果为图片，则放到images文件夹
-                    $filePath = $file->store('/public/images');
-                }
-                elseif (in_array("$ext",$textArray))
-                {
-                    //如果为文档，则放到text文件夹
-                    $filePath = $file->store('/public/text');
-                }else
-                {
-                    $request->session()->flash('warning','文件格式不正确！');
-                    return redirect()->back();
-                }
-            }elseif ($type == 'private')
             {
                 $fileType = 0;
                 if (in_array("$ext",$imageArray))
                 {
-                    $filePath = $file->store('/private/images');
+                    //如果为图片，则放到images文件夹
+                    $filePath = $file->store('/public/public/images');
                 }
                 elseif (in_array("$ext",$textArray))
                 {
-                    $filePath = $file->store('/private/text');
-                }else
+                    //如果为文档，则放到text文件夹
+                    $filePath = $file->store('/public/public/text');
+                }
+                else
+                {
+                    $request->session()->flash('warning','文件格式不正确！');
+                    return redirect()->back();
+                }
+            }
+            elseif ($type == 'private')
+            {
+                $fileType = 1;
+                if (in_array("$ext",$imageArray))
+                {
+                    $filePath = $file->store('/public/private/images');
+                }
+                elseif (in_array("$ext",$textArray))
+                {
+                    $filePath = $file->store('/public/private/text');
+                }
+                else
                 {
                     $request->session()->flash('warning','文件格式不正确！');
                     return redirect()->back();
@@ -137,19 +140,20 @@ class FileListController extends Controller
 
            $fileURL =  asset('storage/'.substr($filePath,7));
 
+            if ($fileType == 1 )
+            {
+                //项目public，使用http协议
+                $fileURL = 'http'.substr($fileURL,5);
+            }
+
             $datas = File::create([
                 'local_path' => $filePath,
                 'file_name' => $fileName,
                 'file_size' => $fileSize,
                 'file_type' => $fileType,
                 'username' => Cookie::get('username'),
+                'file_url'=> $fileURL,
             ]);
-
-            if ($fileType == 1 )
-            {
-                $datas->file_url = $fileURL;
-                $datas->save();
-            }
 
             if ($request->has('projectName'))
             {
@@ -160,6 +164,4 @@ class FileListController extends Controller
         }
         return redirect()->back();
     }
-
-
 }

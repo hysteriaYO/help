@@ -39,6 +39,7 @@
                                     <th>文档数量</th>
                                     <th>创建时间</th>
                                     <th>更新时间</th>
+                                    <th>是否公开</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -53,8 +54,15 @@
                                         <td> {{ $data->created_at }} </td>
                                         <td> {{ $data->updated_at }} </td>
                                         <td>
+                                            @if($data->sign == 1 )
+                                                私有
+                                            @elseif($data->sign == 0)
+                                                公开
+                                            @endif
+                                        </td>
+                                        <td>
                                             <a href="projectId={{ $data->id }}" class="btn btn-sm btn-default">编辑项目</a>
-                                            <a type="button" class="btn btn-success btn-sm">查看文档</a>
+                                            <a href="myDoc?project_name={{$data->project_name}}" type="button" class="btn btn-success btn-sm">查看文档</a>
                                             <button type="submit" class="btn btn-danger btn-sm">删除项目</button>
                                         </td>
                                     </tr>
