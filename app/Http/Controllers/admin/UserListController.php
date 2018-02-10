@@ -21,7 +21,7 @@ class UserListController extends Controller
         //字段范围检测，不能有空字段，不在范围的字段
         $credentials = $this->validate($request,[
             'password' => 'bail|nullable|confirmed|min:6|max:40',
-            'email' => 'bail|required|email',
+            'email' => 'required|email|max:20',
             'phone' => 'bail|nullable|size:11', //numeric
             'description' => 'bail|nullable|max:255',
         ]);
@@ -120,7 +120,7 @@ class UserListController extends Controller
         $this->validate($request,[
             'username' => 'required|unique:users|min:6|max:40',
             'password' => 'required|confirmed|min:6|max:40|alpha_num',
-            'email' => 'required|email|max:40',
+            'email' => 'required|email|max:20',
             'phone' => 'nullable|numeric|max:40',
             'description' => 'nullable|max:255',
         ]);

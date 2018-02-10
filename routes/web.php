@@ -60,34 +60,32 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+//我的项目  相关操作
+    Route::post('homeSearch', 'document\ProjectController@homeSearch');                                     //主页的搜索   匹配关键字相关的项目
+    Route::get('myProject', 'document\ProjectController@myProject');                                        //主页的项目展示
+    Route::post('verifyProjectName','document\ProjectController@verifyProjectName');                        //验证项目名的唯一性
+    Route::post('saveProject', 'document\ProjectController@saveProject');                                   //保存项目信息
+    Route::get('seeProject', 'document\ProjectController@seeProject');                                      //查看单个项目信息
+    Route::any('editProject','document\ProjectController@editProject');                                     //编辑项目信息
+    Route::post('editProjectSave','document\ProjectController@editProjectSave');                            //编辑项目后保存
+    Route::post('dropProject','document\ProjectController@dropProject');                                    //删除项目
 
 
-    //模板页
-    Route::get('base', 'DocController@base');
-    Route::get('basic', 'DocController@basic');
-
-    //主页
-//    Route::get('/','ProjectController@home');
 
 
-    //我的项目
-    Route::get('insertToProject', 'document\ProjectController@insertToProject');
-    Route::get('myProject', 'document\ProjectController@myProject');
-    Route::get('saveProject', 'document\ProjectController@saveProject');
-    Route::get('seeProject', 'document\ProjectController@seeProject');
-    Route::get('homeSearch', 'document\ProjectController@homeSearch');
+    //我的文档  相关操作
+    Route::get('myDoc', 'document\DocController@myDoc');                                                    //单个项目下的所有文档
+    Route::get('project_name={project_name}', ['uses' => 'document\DocController@myPrivateDoc','https'])->name('myPrivateDoc');                          //单个项目下的所有private文档
 
+    Route::get('seeDoc', 'document\DocController@seeDoc');                                                  //查看单个文档的详细信息
+    Route::post('addDocName','document\DocController@addDocName');                                          //添加文档名在左边列表显示
+    Route::post('searchDoc', 'document\DocController@searchDoc');                                           //搜索文档  通过关键字匹配相关文档
 
-    //我的文档
-    Route::get('insertToDoc', 'document\DocController@insertToDoc');
-    Route::get('myDoc', 'document\DocController@myDoc');
-    Route::get('seeDoc', 'document\DocController@seeDoc');
-    Route::get('searchDoc', 'document\DocController@searchDoc');
-
-
-    Route::get('project', function (){
-        $projects = \App\model\Project::all();
-        return view('users.project',['projects'=>$projects]);
-    });
+    Route::post('verifyDocName','document\DocController@verifyDocName');                                    //验证文档名的唯一性
+    Route::post('addDocInfo','document\DocController@addDocInfo');                                          //保存文档的相关信息
+    Route::post('addDocSave','document\DocController@addDocSave');                                          //保存文档的内容
+    Route::post('editDoc','document\DocController@editDoc');                                                //编辑文档内容
+    Route::post('docEditSave','document\DocController@docEditSave');                                        //编辑文档后保存
+    Route::post('dropDoc','document\DocController@dropDoc');                                                //删除文档
 
 });

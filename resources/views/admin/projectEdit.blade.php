@@ -55,6 +55,19 @@
                                     <p style="color: #999;font-size: 12px;">描述不能超过500字</p>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label>
+                                            <input type="radio"  name="sign" value="0" checked=""> 公开<span class="text">(任何人都可以访问)</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>
+                                            <input type="radio"  name="sign" value="1"> 私有<span class="text">(只要参与者或使用令牌才能访问)</span>
+                                        </label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-success" >保存修改</button>
                                     <span id="form-error-message" class="error-message"></span>
                                 </div>

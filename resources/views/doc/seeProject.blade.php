@@ -73,21 +73,15 @@
 @section('title','myProject')
 
 @section('header')
-    @parent
+    @include('layouts.header')
 @endsection
 
-@section('log-header')
-
-@endsection
 
 @section('content')
     <div class="container content-project">
         <div class="left-content">
             <ul class="nav nav-pills">
-
-                <li role="presentation"><a href="#"></a></li>
-                <li role="presentation"><a href="#">Profile</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
+                <li>项目信息</li>
             </ul>
 
         </div>
@@ -98,17 +92,11 @@
                         <div class="head-box">
                             <div class="line">
                                 <strong class="box-title">
-
                                     <i class="fa fa-unlock" aria-hidden="true" title="" data-toggle="tooltip" data-original-title="公开项目"></i>
-
                                     {{$pro -> project_name}}
                                 </strong>
                             </div>
-                            <div>
-                                <a href="/api/yunwei/edit/" class="btn btn-default btn-sm pull-right" target="_blank"><i class="fa fa-edit" aria-hidden="true"></i> 编辑</a>
-                                <a href="/docs/yunwei" class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" target="_blank"><i class="fa fa-eye"></i> 阅读</a>
-                                <button class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" id="btnRelease"><i class="fa fa-upload" aria-hidden="true"></i> 发布</button>
-                            </div>
+
                         </div>
                     </div>
                     <div class="box-body">
@@ -126,7 +114,24 @@
                             </div>
                             <div class="list">
                                 <span class="title">文档数量：</span>
-                                <span class="body">{{$pro->doc_num}} 篇</span>
+                                <span class="body">
+                                    @if($pro->doc_num)
+                                        {{$pro->doc_num}} 篇</span>
+                                    @else
+                                        0 篇
+                                    @endif
+                            </div>
+                            <div class="list">
+                                <span class="title">公司名称：</span>
+                                <span class="body"> {{$pro->company_name}} </span>
+                            </div>
+                            <div class="list">
+                                <span class="title">公司邮箱：</span>
+                                <span class="body"> {{$pro->company_email}} </span>
+                            </div>
+                            <div class="list">
+                                <span class="title">公司电话：</span>
+                                <span class="body"> {{$pro->company_phone}} </span>
                             </div>
                             <div class="list">
                                 <span class="title">创建时间：</span>
@@ -136,16 +141,7 @@
                                 <span class="title">修改时间：</span>
                                 <span class="body"> {{$pro->updated_at}} </span>
                             </div>
-                            <div class="list">
-                                <span class="title">担任角色：</span>
-                                <span class="body">创始人</span>
-                            </div>
 
-                            <div class="list">
-                                <span class="title">文档标签：</span>
-                                <span class="body">{{$pro->tag}}</span>
-                            </div>
-                            <div class="summary">{{$pro->abstract}} </div>
                         @endforeach
                     </div>
                 </div>

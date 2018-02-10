@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\model\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 
 /**
  * Class ProjectListController
@@ -19,10 +20,10 @@ class ProjectListController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $this->validate($request,[
-            'projectName' => 'required',
-            'companyName' => 'required',
-            'companyPhone' => 'required|nullable|numeric',
-            'companyEmail' => 'required|email|max:40',
+            'projectName' => 'required|max:50',
+            'companyName' => 'required|max:50',
+            'companyPhone' =>'required|numeric|max:13',
+            'companyEmail' => 'required|email|max:20',
             'description' => 'nullable|max:255',
         ]);
 
@@ -78,6 +79,16 @@ class ProjectListController extends Controller
             $change = 1;
         }
 
+        if ($request->get('sign') == $datas->sign)
+        {
+            //description没有变化
+        }
+        else
+        {
+            $datas->sign = $request->get('sign');
+            $change = 1;
+        }
+
         if ($change)
         {
             //发生了变化
@@ -121,20 +132,21 @@ class ProjectListController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $this->validate($request,[
-            'username' => 'required',
-            'projectName' => 'required',
-            'companyName' => 'required',
-            'companyPhone' => 'required|nullable|numeric',
-            'companyEmail' => 'required|email|max:40',
+            'project_name' => 'required|unique:projects|max:50',
+            'companyName' => 'required|max:50',
+            'companyPhone' => 'required|numeric|max:13',
+            'companyEmail' => 'required|email|max:20',
             'description' => 'nullable|max:255',
         ]);
 
+        $username = Cookie::get('username');
         $datas = Project::create([
-            'username' => $request->get('username'),
-            'project_name' => $request->get('projectName'),
+            'username' => $username,
+            'project_name' => $request->get('project_name'),
             'company_name' => $request->get('companyName'),
             'company_phone' => $request->get('companyPhone'),
             'company_email' => $request->get('companyEmail'),
+            'sign' => $request->get('sign'),
         ]);
 
         if ($request->has('description'))

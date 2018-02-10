@@ -18,5 +18,17 @@
             
 非空 长度大于6小于40 
 
+email 20位
+ 'email' => 'required|email|max:20'
+ 
+ phone 13位
+ 'phone' => 'nullable|numeric|max:13',
+            required
+            项目必须 用户不必须
 
+description 
+'description' => 'nullable|max:255',
+
+projectName
+'projectName' => 'required|max:50',
 

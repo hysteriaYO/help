@@ -103,7 +103,7 @@ class FileListController extends Controller
             $fileType = 1;
             if ($type == 'public')
             {
-                $fileType = 1;
+                $fileType = 0;
                 if (in_array("$ext",$imageArray))
                 {
                     //如果为图片，则放到images文件夹
@@ -122,7 +122,7 @@ class FileListController extends Controller
             }
             elseif ($type == 'private')
             {
-                $fileType = 0;
+                $fileType = 1;
                 if (in_array("$ext",$imageArray))
                 {
                     $filePath = $file->store('/public/private/images');
@@ -140,22 +140,20 @@ class FileListController extends Controller
 
            $fileURL =  asset('storage/'.substr($filePath,7));
 
-            $datas = File::create([
-                'local_path' => $filePath,
-                'file_name' => $fileName,
-                'file_size' => $fileSize,
-                'file_type' => $fileType,
-                'username' => Cookie::get('username'),
-            ]);
-
             if ($fileType == 1 )
             {
                 //项目public，使用http协议
                 $fileURL = 'http'.substr($fileURL,5);
             }
 
-            $datas->file_url = $fileURL;
-            $datas->save();
+            $datas = File::create([
+                'local_path' => $filePath,
+                'file_name' => $fileName,
+                'file_size' => $fileSize,
+                'file_type' => $fileType,
+                'username' => Cookie::get('username'),
+                'file_url'=> $fileURL,
+            ]);
 
             if ($request->has('projectName'))
             {

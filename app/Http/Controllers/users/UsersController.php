@@ -28,8 +28,6 @@ class UsersController extends Controller
             'vericode' => 'required|confirmed'
         ]);
 
-        echo $request->get('password');
-        exit;
         //用户名、密码匹配
         $loginUser = User::where('username',$request->get('username'))->first();
         if ($loginUser == null)
@@ -70,7 +68,7 @@ class UsersController extends Controller
         $this->validate($request,[
             'username' => 'required|unique:users|min:2|max:40',
             'password' => 'required|confirmed|min:6|max:40|alpha_num',
-            'email' => 'required|email|max:40'
+            'email' => 'required|email|max:20',
         ]);
 
         //开始注册
@@ -91,7 +89,7 @@ class UsersController extends Controller
         $this->validate($request,[
             'username' => 'required|min:2|max:40',
             'password' => 'required|confirmed|min:6|max:40|alpha_num',
-            'email' => 'required|email|max:40'
+            'email' => 'required|email|max:20',
         ]);
 
         $forgetUser = User::where('username',$request->get('username'))->first();
@@ -121,8 +119,8 @@ class UsersController extends Controller
     {
         //字段范围检测，不能有空字段，不在范围的字段
         $credentials = $this->validate($request,[
-            'email' => 'required|email',
-            'phone' => 'nullable|numeric|max:40',
+            'email' => 'required|email|max:20',
+            'phone' => 'nullable|numeric|max:13',
             'description' => 'nullable|max:255',
         ]);
 

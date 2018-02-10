@@ -11,12 +11,9 @@
                         <li>
                             <a href="{{ Route('home') }}" title="首页">首页</a>
                         </li>
-                        <li>
-                            <a href="/tags" title="标签">标签</a>
-                        </li>
                     </ul>
                     <div class="nav-search">
-                        <input class="form-control keyword" id="sea-keyword" placeholder="请输入关键词..." value="">
+                        <input class="form-control keyword" id="sea-keyword" placeholder="请输入关键词...按Enter搜索" value="">
                     </div>
                 </div>
                 <div class="nav-login" role="navigation">
