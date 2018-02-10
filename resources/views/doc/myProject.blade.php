@@ -243,17 +243,18 @@
                                         <input type="radio"  name="sign" value="1"> 私有<span class="text">(只要参与者或使用令牌才能访问)</span>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <span>请上传封面</span>
-                                    <input type="file" enctype="multipart/form-data" class="form-control upload"  name="upload" id="upload" style="border: none;box-shadow: none">
-                                    <input type="button" name="confirmUpload" value="确认上传"/>
-                                </div>
+
                                 <div class="clearfix"></div>
                             </div>
 
-                            <div class="clearfix"></div>
                         </div>
+                        <div class="form-group">
+                            <span>请上传封面(未实现)</span>
+                            <input type="file"  id="upload" class="form-control"  name="upload" style="border: none;box-shadow: none">
+                            {{--<input type="button" name="confirmUpload" value="确认上传"/>--}}
 
+                        </div>
+                        <div class="clearfix"></div>
                         <div class="modal-footer">
                             <span class=""></span>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -367,21 +368,30 @@
         //添加项目的模态框
             $('.btn-add').on('click',function () {
                 $('#myModal').modal('show');
+                $('#myModal').on('shown.bs.modal', function (e) {
+                     // console.log('upload');
+                    $('#btnSaveDocument').on('click',function () {
+                        //$upload = ($('#upload').val());
+                       // var file = new FormData();
+                       // file.append("file",$upload);
+                      //  $form = $('#addBookDialogForm').serialize() +'&upload=' +$upload;
+                      //  console.log($form);
+                        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+                        $.ajax({
+                            url: 'saveProject',
+                            type: 'post',
+                            data: $('#addBookDialogForm').serialize() ,
+                            processData : false,
+                            success:function (data) {
+                                window.location.reload();
+                            }
+                        })
+                    });
+                })
             });
 
         //添加项目
-        $('#btnSaveDocument').on('click',function () {
-            console.log( $('#addBookDialogForm').serialize() );
-            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-            $.ajax({
-                url: 'saveProject',
-                type: 'post',
-                data: $('#addBookDialogForm').serialize() ,
-                success:function (data) {
-                    window.location.reload();
-                }
-            })
-        });
+
 
         //验证项目标题是否唯一
         $('.project_name').on('blur',function () {

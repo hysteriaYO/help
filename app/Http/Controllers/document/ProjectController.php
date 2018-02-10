@@ -76,6 +76,23 @@ class ProjectController extends Controller
      */
     public function saveProject(Request $request)
     {
+        //dd($request);
+//
+//        $a = $request->has('file');
+//        dd($a);
+//        echo 1111;
+//        $file = $request->file();
+//        dd($file);
+//        var_dump($file);
+//        exit;
+//        $file = $request->file('upload');
+//       // $file = $request->get('upload');
+//        echo "fengmian ";
+//        $project_name = $request->get('project_name');
+//        dd($file);
+//        exit;
+//        dd($request);
+//        exit;
         //验证字段
         $credentials = $this->validate($request,[
             'project_name' => 'required|unique:projects|max:50',
@@ -118,51 +135,55 @@ class ProjectController extends Controller
 
             //上传封面
             $file = $request->file('upload');
-            echo "fengmian ";
-            dd($file);
-            exit;
-            $fileSize = $file->getSize();
-            if ($fileSize)
+            if ($file)
             {
-                if ($file->isValid())
+//                echo "fengmian ";
+//                dd($file);
+//                exit;
+                $fileSize = $file->getSize();
+                if ($fileSize)
                 {
-                    $fileName = $file->getClientOriginalName();
-                    $ext = $file->getClientOriginalExtension();
-                    $imageArray = ['png','jpg','jpeg'];
-
-                    if (in_array("$ext",$imageArray))
+                    if ($file->isValid())
                     {
-                        //如果为图片，则放到images文件夹
-                        $filePath = $file->store('/public/public/images');
+                        $fileName = $file->getClientOriginalName();
+                        $ext = $file->getClientOriginalExtension();
+                        $imageArray = ['png','jpg','jpeg'];
+
+                        if (in_array("$ext",$imageArray))
+                        {
+                            //如果为图片，则放到images文件夹
+                            $filePath = $file->store('/public/public/images');
+                        }
+                        else
+                        {
+                            $request->session()->flash('warning','文件格式不正确！');
+                            return redirect()->back();
+                        }
+
+                        $fileURL =  asset('storage/'.substr($filePath,7));
+
+                        $fileURL = 'http'.substr($fileURL,5);
+
+                        $datas = File::create([
+                            'local_path' => $filePath,
+                            'file_name' => $fileName,
+                            'file_size' => $fileSize,
+                            'file_type' => 0,
+                            'username' => Cookie::get('username'),
+                            'file_url'=> $fileURL,
+                        ]);
+
+                        if ($request->has('project_name'))
+                        {
+                            $datas->prject_name = $request->get('project_name');
+                            $datas->save();
+                        }
+                        $request->session()->flash('success','上传成功！');
                     }
-                    else
-                    {
-                        $request->session()->flash('warning','文件格式不正确！');
-                        return redirect()->back();
-                    }
-
-                    $fileURL =  asset('storage/'.substr($filePath,7));
-
-                    $fileURL = 'http'.substr($fileURL,5);
-
-                    $datas = File::create([
-                        'local_path' => $filePath,
-                        'file_name' => $fileName,
-                        'file_size' => $fileSize,
-                        'file_type' => 0,
-                        'username' => Cookie::get('username'),
-                        'file_url'=> $fileURL,
-                    ]);
-
-                    if ($request->has('project_name'))
-                    {
-                        $datas->prject_name = $request->get('project_name');
-                        $datas->save();
-                    }
-                    $request->session()->flash('success','上传成功！');
+                    return redirect()->back();
                 }
-                return redirect()->back();
             }
+
 
             return $projects;
         }
